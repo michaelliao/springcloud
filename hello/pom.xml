@@ -13,15 +13,14 @@
 	<groupId>com.feiyangedu.springcloud</groupId>
 	<artifactId>hello</artifactId>
 	<packaging>jar</packaging>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<name>Hello SpringBoot App</name>
 
 	<properties>
 		<!-- 指定源码编码方式UTF-8 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!-- 指定源码为Java 1.8 -->
+		<!-- 指定源码/class为1.8 -->
 		<maven.compiler.source>1.8</maven.compiler.source>
-		<!-- 指定编译class为Java 1.8 -->
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<!-- 指定虚拟机为Java 1.8 -->
 		<java.version>1.8</java.version>
@@ -33,38 +32,31 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<!-- 使用Swagger调试API -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.6.1</version>
+		</dependency>
+		<!-- 使用spring-boot-devtools可以监控源码改动并自动重新加载 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
-			<!-- 通过maven-jar-plugin把Main-Class写入MANIFEST.MF，以便通过-jar运行 -->
+			<!-- 使用spring-boot-maven-plugin打包可执行jar -->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifest>
-							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-							<addClasspath>true</addClasspath>
-							<mainClass>com.feiyangedu.springcloud.hello.HelloApplication</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
-
-			<!-- 通过maven-shade-plugin把所有依赖的jar包全部打包到最终的jar包内 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-					</execution>
-				</executions>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
