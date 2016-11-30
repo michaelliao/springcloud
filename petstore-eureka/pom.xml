@@ -9,9 +9,9 @@
 		<relativePath>../petstore-parent/pom.xml</relativePath>
 	</parent>
 
-	<artifactId>petstore-config</artifactId>
+	<artifactId>petstore-eureka</artifactId>
 	<packaging>jar</packaging>
-	<name>petstore-config</name>
+	<name>petstore-eureka</name>
 
 	<dependencies>
 		<dependency>
