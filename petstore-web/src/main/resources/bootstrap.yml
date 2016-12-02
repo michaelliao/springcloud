@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: support
+  cloud:
+    config:
+      fail-fast: true
+
+server:
+  port: 9000
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${spring.eureka.server.serviceUrl}
