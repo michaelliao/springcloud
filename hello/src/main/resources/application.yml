@@ -1,3 +1,6 @@
-# 可以设置端口，默认8080:
+spring:
+  application:
+    name: hello
+
 server:
   port: 9090
