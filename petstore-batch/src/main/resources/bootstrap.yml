@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: batch
+  cloud:
+    config:
+      fail-fast: true
+
+server:
+  port: 9003
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${spring.eureka.server.serviceUrl}
