@@ -1,0 +1,29 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: configserver
+  profiles:
+    active: ${ENV:native}
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:conf
+
+encrypt:
+  # 使用环境变量或默认值作为key:
+  key: ${SPRING_ENCRYPT_KEY:SecretKey4PetStore}
+
+---
+
+# 定义一个test profiles，使用git配置:
+
+spring:
+  profiles: test
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/michaelliao/springcloud-config.git
