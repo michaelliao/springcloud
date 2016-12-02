@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: common
+  cloud:
+    config:
+      fail-fast: true
