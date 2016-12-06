@@ -8,6 +8,7 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -25,6 +26,11 @@ import com.feiyangedu.springcloud.data.domain.User;
 import com.feiyangedu.springcloud.data.repository.UserRepository;
 import com.feiyangedu.springcloud.data.request.UserReq;
 
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 /**
  * Spring Boot Application using Spring Data Jpa.
  * 
@@ -32,6 +38,7 @@ import com.feiyangedu.springcloud.data.request.UserReq;
  */
 @SpringBootApplication
 @EnableJpaRepositories
+@EnableSwagger2
 @RestController
 public class DataJpaApplication {
 
@@ -51,7 +58,7 @@ public class DataJpaApplication {
 		return "<h1>Hello World!</h1>";
 	}
 
-	@PostMapping("/users")
+	@PostMapping("/api/users")
 	public User createUser() {
 		User user = new User();
 		user.setEmail(randomString() + "@itranswarp.com");
@@ -61,7 +68,7 @@ public class DataJpaApplication {
 		return user;
 	}
 
-	@PutMapping("/users/{id}")
+	@PutMapping("/api/users/{id}")
 	public User updateUser(@PathVariable("id") Long id, @RequestBody UserReq user) {
 		User exist = userRepository.findOne(id);
 		if (exist == null) {
@@ -74,7 +81,7 @@ public class DataJpaApplication {
 		return exist;
 	}
 
-	@DeleteMapping("/users/{id}")
+	@DeleteMapping("/api/users/{id}")
 	public boolean deleteUser(@PathVariable("id") Long id) {
 		User exist = userRepository.findOne(id);
 		if (exist != null) {
@@ -84,7 +91,7 @@ public class DataJpaApplication {
 		return false;
 	}
 
-	@GetMapping("/users")
+	@GetMapping("/api/users")
 	public Page<User> getUsers(@RequestParam(value = "page", defaultValue = "0") int page,
 			@RequestParam(value = "size", defaultValue = "10") int size) {
 		return userRepository.findAll(new PageRequest(page, size));
@@ -96,5 +103,10 @@ public class DataJpaApplication {
 
 	private String randomString() {
 		return UUID.randomUUID().toString();
+	}
+
+	@Bean
+	public Docket userApi() {
+		return new Docket(DocumentationType.SWAGGER_2).select().paths(PathSelectors.regex("^/api/.*$")).build();
 	}
 }
