@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,12 +22,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.feiyangedu.springcloud.data.domain.User;
 import com.feiyangedu.springcloud.data.request.UserReq;
 
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 /**
- * Spring Boot Application using Spring Data Jpa.
+ * Spring Boot Application using Spring Data Jdbc.
  * 
  * @author Michael Liao
  */
 @SpringBootApplication
+@EnableSwagger2
 @RestController
 public class DataJdbcApplication {
 
@@ -57,7 +64,7 @@ public class DataJdbcApplication {
 		}
 	}
 
-	@PostMapping("/users")
+	@PostMapping("/api/users")
 	public User createUser(@RequestBody UserReq req) {
 		String id = randomString();
 		Long now = System.currentTimeMillis();
@@ -67,25 +74,25 @@ public class DataJdbcApplication {
 		return getUser(id);
 	}
 
-	@GetMapping("/users")
+	@GetMapping("/api/users")
 	public List<User> getUsers() {
 		return jdbcTemplate.query("SELECT * FROM user ORDER BY createdAt", new BeanPropertyRowMapper<>(User.class));
 	}
 
-	@GetMapping("/users/{id}")
+	@GetMapping("/api/users/{id}")
 	public User getUser(@PathVariable("id") String id) {
 		return jdbcTemplate.queryForObject("SELECT * FROM user WHERE id=?", new BeanPropertyRowMapper<>(User.class),
 				id);
 	}
 
-	@PutMapping("/users/{id}")
+	@PutMapping("/api/users/{id}")
 	public User updateUser(@PathVariable("id") String id, @RequestBody UserReq req) {
 		jdbcTemplate.update("UPDATE user SET email=?, name=?, gender=?, updatedAt=? WHERE id=?", // SQL
 				req.getEmail(), req.getName(), req.isGender(), System.currentTimeMillis(), id);
 		return getUser(id);
 	}
 
-	@DeleteMapping("/users/{id}")
+	@DeleteMapping("/api/users/{id}")
 	public boolean deleteUser(@PathVariable("id") String id) {
 		int n = jdbcTemplate.update("DELETE FROM user WHERE id=?", id);
 		return n == 1;
@@ -95,4 +102,8 @@ public class DataJdbcApplication {
 		return UUID.randomUUID().toString();
 	}
 
+	@Bean
+	public Docket userApi() {
+		return new Docket(DocumentationType.SWAGGER_2).select().paths(PathSelectors.regex("^/api/.*$")).build();
+	}
 }

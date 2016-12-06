@@ -14,7 +14,7 @@
 	<artifactId>data-jdbc</artifactId>
 	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Hello SpringBoot App</name>
+	<name>Spring Boot Data Jdbc App</name>
 
 	<properties>
 		<!-- 指定源码编码方式UTF-8 -->
