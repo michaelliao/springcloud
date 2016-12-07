@@ -1,4 +1,4 @@
-package com.feiyangedu.springcloud.data;
+package com.feiyangedu.springcloud.cache;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
