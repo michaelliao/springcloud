@@ -1,14 +1,9 @@
 spring:
   application:
     name: account
+  profiles:
+    active: ${PROFILES:native}
   cloud:
     config:
+      uri: ${CONFIG_SERVER:http://localhost:8888}
       fail-fast: true
-
-server:
-  port: 9002
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
