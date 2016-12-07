@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: freemarker
+
+  freemarker:
+    suffix: .html
+    # set to true in production mode:
+    cache: false
+    settings:
+      output_format: HTMLOutputFormat
+
+server:
+  port: 9090
