@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: pebble
+
+pebble:
+  cache: false
+
+server:
+  port: 9090
