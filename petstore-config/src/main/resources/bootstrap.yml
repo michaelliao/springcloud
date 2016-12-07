@@ -3,7 +3,13 @@ server:
 
 spring:
   application:
-    name: configserver
+    name: config-server
+
+---
+
+# native configuration:
+
+spring:
   profiles:
     active: ${ENV:native}
   cloud:

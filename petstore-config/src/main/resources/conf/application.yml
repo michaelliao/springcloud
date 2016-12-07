@@ -1,11 +1,19 @@
+# spring common configurations:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    user: root
+    username: root
     # 需要加密的配置信息通过命令获取加密后的字符串:
     # curl http://localhost:8888/encrypt -d 'original password'
     password: '{cipher}b38de5599e160c5d83ef67f9ba660f1a77c0e8527dba9d2dd99bc59e564e2bb8'
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
 
-  eureka:
-    server:
-      serviceUrl: http://localhost:8761/eureka
+# eureka service:
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
