@@ -15,5 +15,9 @@ spring:
 # eureka service:
 eureka:
   client:
+    instanceInfoReplicationIntervalSeconds: 10
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+  instance:
+    preferIpAddress: true
+    leaseExpirationDurationInSeconds: 60
