@@ -1,12 +1,12 @@
-package com.feiyangedu.springcloud.petstore.user;
+package com.feiyangedu.springcloud.petstore.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UserApplication {
+public class WebApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(UserApplication.class, args);
+		SpringApplication.run(WebApplication.class, args);
 	}
 }
