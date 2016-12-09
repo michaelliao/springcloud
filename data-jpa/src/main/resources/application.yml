@@ -1,8 +1,18 @@
 spring:
   application:
     name: data
+  # JPA配置:
   jpa:
     show-sql: true
+    properties:
+      javax:
+        persistence:
+          # 自动生成DDL脚本:
+          schema-generation:
+            create-source: metadata
+            scripts:
+              action: create
+              create-target: target/init.sql
 
 server:
   port: 9090
