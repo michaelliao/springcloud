@@ -4,11 +4,19 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     # 需要加密的配置信息通过命令获取加密后的字符串:
-    # curl http://localhost:8888/encrypt -d 'original password'
+    # curl -d 'original string' http://localhost:8888/encrypt
     password: '{cipher}b38de5599e160c5d83ef67f9ba660f1a77c0e8527dba9d2dd99bc59e564e2bb8'
   jpa:
     show-sql: true
     properties:
+      javax:
+        persistence:
+          # 自动生成DDL脚本:
+          schema-generation:
+            create-source: metadata
+            scripts:
+              action: create
+              create-target: target/init.sql
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
 
