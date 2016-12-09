@@ -5,4 +5,4 @@ spring:
   application:
     name: account
   datasource:
-    url: jdbc:mysql://localhost:3306/petstore_account?useSSL=false
+    database: petstore_account
