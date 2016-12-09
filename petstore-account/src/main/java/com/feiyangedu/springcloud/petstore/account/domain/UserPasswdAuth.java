@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import com.feiyangedu.springcloud.petstore.common.domain.AbstractEntity;
 
 @Entity
-public class UserAuth extends AbstractEntity {
+public class UserPasswdAuth extends AbstractEntity {
 
 	@Column(length = ID_LENGTH, nullable = false, updatable = false, unique = true)
 	private String userId;
