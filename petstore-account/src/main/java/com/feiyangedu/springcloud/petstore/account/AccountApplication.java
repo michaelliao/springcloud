@@ -6,12 +6,12 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.feiyangedu.springcloud.petstore.common.config.SwaggerConfig;
+import com.feiyangedu.springcloud.petstore.common.config.CustomWebConfig;
 
 @SpringBootApplication
 @EnableJpaRepositories
 @EnableDiscoveryClient
-@Import(SwaggerConfig.class)
+@Import(CustomWebConfig.class)
 public class AccountApplication {
 
 	public static void main(String[] args) {
