@@ -7,6 +7,8 @@ import com.feiyangedu.springcloud.petstore.common.exception.APIEntityNotFoundExc
 
 public abstract class AbstractService {
 
+	protected final int DEFAULT_PAGE_SIZE = 20;
+
 	protected final Log log = LogFactory.getLog(getClass());
 
 	protected <T> T checkNonNull(T entity) {
