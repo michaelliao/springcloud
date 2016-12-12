@@ -1,25 +1,23 @@
 package com.feiyangedu.springcloud.petstore.common.context;
 
-import com.feiyangedu.springcloud.petstore.account.domain.User;
-
 public class UserContext implements AutoCloseable {
 
-	static final ThreadLocal<User> threadLocal = new ThreadLocal<>();
+	static final ThreadLocal<UserInfo> threadLocal = new ThreadLocal<>();
 
-	public static User getCurrentUser() {
+	public static UserInfo getCurrentUserInfo() {
 		return threadLocal.get();
 	}
 
-	public static User getRequiredCurrentUser() {
-		User user = getCurrentUser();
-		if (user == null) {
+	public static UserInfo getRequiredCurrentUserInfo() {
+		UserInfo userInfo = getCurrentUserInfo();
+		if (userInfo == null) {
 			throw new NoUserContextException();
 		}
-		return user;
+		return userInfo;
 	}
 
-	public UserContext(User user) {
-		threadLocal.set(user);
+	public UserContext(UserInfo userInfo) {
+		threadLocal.set(userInfo);
 	}
 
 	@Override
