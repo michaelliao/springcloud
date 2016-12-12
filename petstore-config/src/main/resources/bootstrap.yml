@@ -4,23 +4,24 @@ server:
 spring:
   application:
     name: config-server
+  profiles:
+    active: ${ENV:native}
+
+encrypt:
+  # 使用环境变量或默认值作为key:
+  key: ${SPRING_ENCRYPT_KEY:SecretKey4PetStore}
 
 ---
 
 # native configuration:
 
 spring:
-  profiles:
-    active: ${ENV:native}
+  profiles: native
   cloud:
     config:
       server:
         native:
           search-locations: classpath:conf
-
-encrypt:
-  # 使用环境变量或默认值作为key:
-  key: ${SPRING_ENCRYPT_KEY:SecretKey4PetStore}
 
 ---
 
