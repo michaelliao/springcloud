@@ -14,7 +14,7 @@
 	<artifactId>cache</artifactId>
 	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Springboot Cache App</name>
+	<name>Spring Boot Cache App</name>
 
 	<properties>
 		<!-- 指定源码编码方式UTF-8 -->
