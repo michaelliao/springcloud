@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.feiyangedu.springcloud.petstore.common.context.UserContext;
@@ -21,9 +20,11 @@ import com.feiyangedu.springcloud.petstore.common.context.UserInfo;
 
 public class UserContextFilter implements Filter {
 
-	// FIXME: set ref
-	@Autowired
 	ObjectMapper objectMapper;
+
+	public void setObjectMapper(ObjectMapper objectMapper) {
+		this.objectMapper = objectMapper;
+	}
 
 	final Log log = LogFactory.getLog(getClass());
 
@@ -44,6 +45,7 @@ public class UserContextFilter implements Filter {
 				log.warn("Error decode X-User-Info.", e);
 			}
 		}
+		log.info("Process request with user info: " + userInfo);
 		try (UserContext ctx = new UserContext(userInfo)) {
 			chain.doFilter(req, resp);
 		}

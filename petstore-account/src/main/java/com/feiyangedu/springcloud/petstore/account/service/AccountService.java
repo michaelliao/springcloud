@@ -23,6 +23,11 @@ public class AccountService extends AbstractService {
 	@Autowired
 	UserRepository userRepository;
 
+	@GetMapping("/api/test")
+	public String test() {
+		return "TIME: " + System.currentTimeMillis();
+	}
+
 	@GetMapping("/api/users")
 	public Page<User> getUsers(@RequestParam(value = "page", defaultValue = "0") int pageIndex) {
 		return userRepository.findAll(new PageRequest(pageIndex, DEFAULT_PAGE_SIZE,
