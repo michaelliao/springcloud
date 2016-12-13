@@ -3,6 +3,7 @@ package com.feiyangedu.springcloud.petstore.common.config;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,11 +45,16 @@ public class CustomWebConfig {
 				.description("Petstore Sample Application on Spring Cloud").build();
 	}
 
+	@Value("${filter.userContext.urlPattern:/api/*}")
+	String userContextFilterPattern;
+
 	@Bean
 	public FilterRegistrationBean userContextFilterRegistration() {
+		UserContextFilter userContextFilter = new UserContextFilter();
+		userContextFilter.setObjectMapper(objectMapper);
 		FilterRegistrationBean registration = new FilterRegistrationBean();
-		registration.setFilter(new UserContextFilter());
-		registration.addUrlPatterns("/*");
+		registration.setFilter(userContextFilter);
+		registration.addUrlPatterns(userContextFilterPattern);
 		registration.setName("userContextFilter");
 		registration.setOrder(1);
 		return registration;
