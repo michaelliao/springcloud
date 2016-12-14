@@ -11,6 +11,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import io.swagger.models.Swagger;
 import io.swagger.parser.SwaggerParser;
@@ -36,10 +38,13 @@ public class ApiClientCodegen {
 		list.add("--groupId=io.swagger.api.client");
 		list.add("--version=0.0.1-SNAPSHOT");
 		list.add("--publicField=false");
+		list.add("--springVersion=4.3.4.RELEASE");
 		list.add("--output=" + name + "-client");
 		this.config = getConfig(list);
 		// build client:
-		buildClient(parse("--output=", list));
+		String output = parse("--output=", list);
+		buildClient(output);
+		System.out.println("Generated in " + output + ".");
 	}
 
 	@SuppressWarnings("unchecked")
@@ -53,7 +58,7 @@ public class ApiClientCodegen {
 		// create pom.xml:
 		Map<String, Object> pomContext = new HashMap<>();
 		pomContext.put("config", this.config);
-		createByTemplate("pom.txt", pomContext, new File(root, "pom.xml"));
+		createByTemplate("pom.txt", pomContext, new File(root, "pom.xml"), null);
 		// mkdirs:
 		String name = (String) this.config.get("name");
 		String maxPackage = (String) this.config.get("basePackage") + ".model";
@@ -71,31 +76,41 @@ public class ApiClientCodegen {
 		clientContext.put("config", this.config);
 		clientContext.put("swagger", swaggerData);
 		clientContext.put("util", new Util());
-		String javaFilename = Character.toUpperCase(name.charAt(0)) + name.substring(1) + ".java";
-		createByTemplate("client.txt", clientContext, new File(clientPath, javaFilename));
+		String javaFilename = Character.toUpperCase(name.charAt(0)) + name.substring(1) + "Client.java";
+		createByTemplate("client.txt", clientContext, new File(clientPath, javaFilename), null);
 		// generate models:
 		Map<String, Object> definitions = (Map<String, Object>) this.swaggerData.getOrDefault("definitions",
 				Collections.emptyMap());
 		for (String key : definitions.keySet()) {
 			Map<String, Object> modelContext = new HashMap<>();
+			String genericType = "";
+			Matcher matcher = Pattern.compile("^(\\w+)(\\<\\w+\\>)$").matcher(key);
+			if (matcher.matches()) {
+				genericType = matcher.group(2);
+			}
 			modelContext.put("name", key);
 			modelContext.put("swagger", this.swaggerData);
 			modelContext.put("config", this.config);
 			modelContext.put("util", new Util());
-			String javaModelFilename = Character.toUpperCase(key.charAt(0)) + key.substring(1) + ".java";
-			createByTemplate("bean.txt", modelContext, new File(modelPath, javaModelFilename));
+			String javaModelFilename = Character.toUpperCase(key.charAt(0))
+					+ key.substring(1, key.length() - genericType.length()) + ".java";
+			createByTemplate("bean.txt", modelContext, new File(modelPath, javaModelFilename), genericType);
 		}
 	}
 
-	void createByTemplate(String templateName, Map<String, Object> context, File output) throws Exception {
+	void createByTemplate(String templateName, Map<String, Object> context, File output, String genericType)
+			throws Exception {
 		String str = this.builder.render(templateName, context);
+		if (genericType != null && !genericType.isEmpty()) {
+			str = str.replace(genericType, "<T>");
+		}
 		try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(output), "UTF-8"))) {
 			writer.write(str);
 		}
 	}
 
 	File mkdirs(File root, String... children) throws Exception {
-		File p = new File(root, String.join(File.pathSeparator, children));
+		File p = new File(root, String.join(File.separator, children));
 		if (!p.isDirectory()) {
 			p.mkdirs();
 		}
@@ -106,7 +121,12 @@ public class ApiClientCodegen {
 	}
 
 	public static void main(String[] args) throws Exception {
-		new ApiClientCodegen(Arrays.asList("--name=account", "--url=http://localhost:9002/v2/api-docs"));
+		if (args.length == 0) {
+			System.out.println("Usage:");
+			System.out.println("java -jar xxx.jar --name=<app-name> --url=http://host/path/to/api-docs");
+			System.exit(0);
+		}
+		new ApiClientCodegen(Arrays.asList(args));
 	}
 
 	static Map<String, Object> getConfig(List<String> args) {
@@ -114,6 +134,7 @@ public class ApiClientCodegen {
 		boolean publicField = "true".equals(parse("--publicField", args));
 		String groupId = parse("--groupId=", args);
 		String version = parse("--version=", args);
+		String springVersion = parse("--springVersion=", args);
 
 		Map<String, Object> cfg = new HashMap<>();
 		cfg.put("groupId", groupId);
@@ -121,6 +142,7 @@ public class ApiClientCodegen {
 		cfg.put("basePackage", groupId + "." + name);
 		cfg.put("name", name);
 		cfg.put("publicField", publicField);
+		cfg.put("springVersion", springVersion);
 		return cfg;
 	}
 
@@ -130,6 +152,8 @@ public class ApiClientCodegen {
 				return arg.substring(prefix.length());
 			}
 		}
+		System.err.println("Missing argument: " + prefix);
+		System.exit(1);
 		throw new RuntimeException("Missing argument: " + prefix);
 	}
 }
