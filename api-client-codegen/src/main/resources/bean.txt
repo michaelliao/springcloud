@@ -1,7 +1,5 @@
 package {{ config.basePackage }}.model;
 
-import org.springframework.web.bind.annotation.*;
-
 /**
  * {{ swagger.info.description }} 
  * 
