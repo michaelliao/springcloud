@@ -2,7 +2,7 @@ package com.feiyangedu.springcloud.petstore.common.exception;
 
 public class APIException extends RuntimeException {
 
-	static final String UNKNOWN_INTERNAL_ERROR = "unknown:internal_error";
+	public static final String UNKNOWN_INTERNAL_ERROR = "unknown:internal_error";
 
 	public final String code;
 
