@@ -2,11 +2,13 @@ package com.feiyangedu.springcloud.petstore.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Import;
 
 import com.feiyangedu.springcloud.petstore.common.config.CustomWebConfig;
 
 @SpringBootApplication
+@EnableFeignClients
 @Import(CustomWebConfig.class)
 public class WebApplication {
 
