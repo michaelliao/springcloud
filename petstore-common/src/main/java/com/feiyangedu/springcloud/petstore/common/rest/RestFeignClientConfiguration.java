@@ -3,15 +3,26 @@ package com.feiyangedu.springcloud.petstore.common.rest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Scope;
 
+import feign.Feign;
 import feign.Logger;
 import feign.codec.ErrorDecoder;
 
 @Configuration
-public class CustomFeignClientConfiguration {
+public class RestFeignClientConfiguration {
 
-	@Value("spring.feign.logger.level:BASIC")
-	Logger.Level loggerLevel;
+	@Value("${spring.feign.logger.level:BASIC}")
+	String loggerLevel;
+
+	@Bean
+	@Scope("prototype")
+	@Primary
+	// Disable hystrix
+	public Feign.Builder feignBuilder() {
+		return Feign.builder();
+	}
 
 	@Bean
 	public ErrorDecoder feignErrorDecoder() {
@@ -20,6 +31,6 @@ public class CustomFeignClientConfiguration {
 
 	@Bean
 	Logger.Level feignLoggerLevel() {
-		return loggerLevel;
+		return Logger.Level.valueOf(loggerLevel);
 	}
 }

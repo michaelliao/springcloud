@@ -4,8 +4,11 @@ import com.feiyangedu.springcloud.petstore.common.exception.APIException;
 
 public class APIErrorResponse {
 
-	public final String code;
-	public final String message;
+	public String code;
+	public String message;
+
+	public APIErrorResponse() {
+	}
 
 	public APIErrorResponse(APIException e) {
 		this.code = e.code;

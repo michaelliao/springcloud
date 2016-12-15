@@ -17,6 +17,8 @@ public class RestErrorDecoder implements ErrorDecoder {
 	@Autowired
 	ObjectMapper objectMapper;
 
+	ErrorDecoder delegate = new ErrorDecoder.Default();
+
 	@Override
 	public Exception decode(String methodKey, Response response) {
 		if (response.status() == 400) {
@@ -33,7 +35,7 @@ public class RestErrorDecoder implements ErrorDecoder {
 				}
 			}
 		}
-		return new RuntimeException("Unknown exception: " + response.status());
+		return delegate.decode(methodKey, response);
 	}
 
 }
