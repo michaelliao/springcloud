@@ -2,7 +2,5 @@ server:
   port: 9002
 
 spring:
-  application:
-    name: account
   datasource:
     database: petstore_account
