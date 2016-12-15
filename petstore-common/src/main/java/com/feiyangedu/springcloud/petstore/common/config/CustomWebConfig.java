@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -19,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.feiyangedu.springcloud.petstore.common.filter.UserContextFilter;
+import com.feiyangedu.springcloud.petstore.common.rest.RestExceptionHandler;
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -30,6 +32,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
+@EnableDiscoveryClient
 public class CustomWebConfig {
 
 	@Bean
@@ -43,6 +46,11 @@ public class CustomWebConfig {
 				.contact(new Contact("Liao Xuefeng", "http://www.liaoxuefeng.com", "askxuefeng@gmail.com"))
 				.license("Apache 2.0").licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
 				.description("Petstore Sample Application on Spring Cloud").build();
+	}
+
+	@Bean
+	public RestExceptionHandler restExceptionHandler() {
+		return new RestExceptionHandler();
 	}
 
 	@Value("${filter.userContext.urlPattern:/api/*}")
