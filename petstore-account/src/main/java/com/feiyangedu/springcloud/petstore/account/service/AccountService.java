@@ -23,11 +23,11 @@ public class AccountService extends AbstractService {
 	@Autowired
 	UserRepository userRepository;
 
-	@GetMapping("/api/test")
-	public String test() {
-		return "TIME: " + System.currentTimeMillis();
-	}
-
+	/**
+	 * Get all users.
+	 * 
+	 * @param pageIndex
+	 */
 	@GetMapping("/api/users")
 	public Page<User> getUsers(@RequestParam(value = "page", defaultValue = "0") int pageIndex) {
 		return userRepository.findAll(new PageRequest(pageIndex, DEFAULT_PAGE_SIZE,
@@ -37,6 +37,14 @@ public class AccountService extends AbstractService {
 	@GetMapping("/api/users/{id}")
 	public User getUser(@PathVariable("id") String id) {
 		return checkNonNull(userRepository.findOne(id));
+	}
+
+	@PostMapping("/api/users2")
+	public User createUser2(@RequestParam("aa") java.time.LocalDateTime aa, @RequestBody UserBean bean) {
+		User user = new User();
+		BeanUtil.copyPublicFields(bean, user);
+		userRepository.save(user);
+		return user;
 	}
 
 	@PostMapping("/api/users")
