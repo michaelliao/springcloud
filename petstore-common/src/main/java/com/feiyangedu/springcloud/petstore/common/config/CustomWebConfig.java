@@ -8,12 +8,15 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -72,6 +75,7 @@ public class CustomWebConfig {
 	public ObjectMapper objectMapper() {
 		final ObjectMapper mapper = new ObjectMapper();
 		mapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);
+		mapper.addMixIn(Page.class, PageMixIn.class);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
@@ -106,4 +110,11 @@ public class CustomWebConfig {
 			}
 		};
 	}
+}
+
+abstract class PageMixIn {
+
+	@JsonIgnore
+	public abstract Sort getSort(); // we don't need it!
+
 }
