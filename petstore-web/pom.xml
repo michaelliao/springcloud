@@ -19,5 +19,10 @@
 			<artifactId>petstore-common</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>io.swagger.api.client</groupId>
+			<artifactId>account-client</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>
