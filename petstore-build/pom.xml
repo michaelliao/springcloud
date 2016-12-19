@@ -8,8 +8,16 @@
 	<name>Petstore Build POM</name>
 
 	<modules>
+		<module>../petstore-clients/account-client</module>
 		<module>../petstore-account</module>
+		<module>../petstore-batch</module>
 		<module>../petstore-common</module>
 		<module>../petstore-config</module>
+		<module>../petstore-eureka</module>
+		<module>../petstore-gateway</module>
+		<module>../petstore-product</module>
+		<module>../petstore-search</module>
+		<module>../petstore-support</module>
+		<module>../petstore-web</module>
 	</modules>
 </project>
