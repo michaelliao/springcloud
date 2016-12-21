@@ -1,0 +1,10 @@
+server:
+  port: 9000
+
+zuul:
+  ignoredServices: "*"
+  routes:
+    account:
+      serviceId: account
+      path: /api/account/**
+      stripPrefix: false
