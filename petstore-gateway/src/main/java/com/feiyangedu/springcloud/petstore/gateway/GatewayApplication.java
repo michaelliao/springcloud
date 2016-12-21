@@ -1,4 +1,4 @@
-package com.feiyangedu.springcloud.petstore.user;
+package com.feiyangedu.springcloud.petstore.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
