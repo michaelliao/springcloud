@@ -44,7 +44,7 @@ public class CustomWebConfig {
 				.paths(PathSelectors.regex("^/api/.*$")).build();
 	}
 
-	ApiInfo apiInfo() {
+	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder().title("Petstore")
 				.contact(new Contact("Liao Xuefeng", "http://www.liaoxuefeng.com", "askxuefeng@gmail.com"))
 				.license("Apache 2.0").licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
@@ -71,14 +71,20 @@ public class CustomWebConfig {
 		return registration;
 	}
 
+	/**
+	 * Customized JSON ObjectMapper.
+	 */
 	@Bean
 	public ObjectMapper objectMapper() {
 		final ObjectMapper mapper = new ObjectMapper();
 		mapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);
+		// ignored properties: Page.sort
 		mapper.addMixIn(Page.class, PageMixIn.class);
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		// disabled features:
+		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 		mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+		// add java8 time support:
 		mapper.registerModule(new JavaTimeModule());
 		return mapper;
 	}
