@@ -5,7 +5,7 @@
 	<artifactId>petstore-build</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>Petstore Build POM</name>
+	<name>Petstore Build</name>
 
 	<modules>
 		<module>../petstore-clients/account-client</module>
@@ -15,6 +15,7 @@
 		<module>../petstore-config</module>
 		<module>../petstore-eureka</module>
 		<module>../petstore-gateway</module>
+		<module>../petstore-parent</module>
 		<module>../petstore-product</module>
 		<module>../petstore-search</module>
 		<module>../petstore-support</module>

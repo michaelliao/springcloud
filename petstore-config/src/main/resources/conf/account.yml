@@ -1,6 +1,2 @@
 server:
   port: 9001
-
-spring:
-  datasource:
-    database: petstore_account

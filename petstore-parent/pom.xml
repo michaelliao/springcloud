@@ -26,6 +26,9 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<java.version>1.8</java.version>
+		<!-- 第三方version -->
+		<spotify.docker.version>0.4.13</spotify.docker.version>
+		<swagger2.version>2.6.1</swagger2.version>
 	</properties>
 
 	<dependencyManagement>
@@ -64,12 +67,12 @@
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
-			<version>2.6.1</version>
+			<version>${swagger2.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
-			<version>2.6.1</version>
+			<version>${swagger2.version}</version>
 		</dependency>
 		<!-- 使用spring-boot-devtools可以监控源码改动并自动重新加载 -->
 		<dependency>
@@ -86,15 +89,43 @@
 	</dependencies>
 
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<!-- exclude dev-tools -->
-					<excludeDevtools>true</excludeDevtools>
-				</configuration>
-			</plugin>
-		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!-- 打包SpringBoot Application Jar -->
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<configuration>
+						<!-- 不打包dev-tools -->
+						<excludeDevtools>true</excludeDevtools>
+					</configuration>
+				</plugin>
+				<!-- 创建Docker Image -->
+				<plugin>
+					<groupId>com.spotify</groupId>
+					<artifactId>docker-maven-plugin</artifactId>
+					<version>${spotify.docker.version}</version>
+					<configuration>
+						<imageName>${project.artifactId}</imageName>
+						<imageTags>
+							<imageTag>${project.version}</imageTag>
+						</imageTags>
+						<!-- Dockerfile文件所在目录 -->
+						<dockerDirectory>docker</dockerDirectory>
+						<resources>
+							<resource>
+								<targetPath>/</targetPath>
+								<directory>${project.build.directory}</directory>
+								<include>${project.build.finalName}.jar</include>
+							</resource>
+						</resources>
+						<!-- 给Dockerfile传递jarfile参数 -->
+						<buildArgs>
+							<jarfile>${project.build.finalName}.jar</jarfile>
+						</buildArgs>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 </project>
