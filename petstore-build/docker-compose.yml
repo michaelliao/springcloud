@@ -1,0 +1,49 @@
+# petstore docker-compose
+
+version: "2"
+
+services:
+  ubuntu:
+    image: ubuntu:latest
+    container_name: ubuntu
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: petstore
+
+  redis:
+    image: redis:3.2
+    container_name: redis
+    ports:
+      - "6380:6379"
+
+  eureka:
+    image: petstore-eureka:0.0.1-SNAPSHOT
+    container_name: petstore-eureka
+    ports:
+      - "8761:8761"
+    volumes:
+      - /tmp
+
+  config:
+    image: petstore-config:0.0.1-SNAPSHOT
+    container_name: petstore-config
+    ports:
+      - "8888:8888"
+    volumes:
+      - /tmp
+
+  account:
+    image: petstore-account:0.0.1-SNAPSHOT
+    container_name: petstore-account
+    ports:
+      - "9001:9001"
+    volumes:
+      - /tmp
