@@ -2,7 +2,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://172.17.0.1:3307/petstore?useSSL=false
+    url: jdbc:mysql://localhost:3306/petstore?useSSL=false
     username: root
     # 需要加密的配置信息通过命令获取加密后的字符串:
     # curl -d 'original string' http://localhost:8888/encrypt
@@ -27,4 +27,4 @@ eureka:
     preferIpAddress: true
   client:
     serviceUrl:
-      defaultZone: http://172.17.0.1:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
