@@ -7,6 +7,20 @@ services:
     image: ubuntu:latest
     container_name: ubuntu
 
+  openvpn:
+    image: kylemanna/openvpn:2.0.0
+    container_name: openvpn
+    volumes:
+      - ./openvpn-data:/local
+      - ./openvpn-data/config:/etc/openvpn
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+    environment:
+      dest: docker-for-mac.ovpn
+      DEBUG: '1'
+    command: /local/run.sh
+
   mysql:
     image: mysql:5.7
     container_name: mysql
@@ -23,6 +37,12 @@ services:
     container_name: redis
     ports:
       - "6380:6379"
+
+  rabbitmq:
+    image: rabbitmq:3.6-management
+    container_name: rabbitmq
+    ports:
+      - "15672:15672"
 
   eureka:
     image: petstore-eureka:0.0.1-SNAPSHOT
