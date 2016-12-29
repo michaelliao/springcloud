@@ -1,6 +1,6 @@
 spring:
   application:
-    name: cache
+    name: cacheredis
 
   cache:
     # 强制使用Redis作为Cache:

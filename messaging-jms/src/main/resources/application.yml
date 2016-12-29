@@ -1,6 +1,6 @@
 spring:
   application:
-    name: hello
+    name: jms
 
   activemq:
     in-memory: true
