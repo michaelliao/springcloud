@@ -7,12 +7,25 @@ services:
     image: ubuntu:latest
     container_name: ubuntu
 
+  ipsec:
+    image: hwdsl2/ipsec-vpn-server:latest
+    container_name: ipsec
+    ports:
+      - "500:500/udp"
+      - "4500:4500/udp"
+    volumes:
+      - /lib/modules:/lib/modules:ro
+    environment:
+      VPN_IPSEC_PSK: sharedkey
+      VPN_USER: docker
+      VPN_PASSWORD: password
+
   openvpn:
     image: kylemanna/openvpn:2.0.0
     container_name: openvpn
     volumes:
-      - ./openvpn-data:/local
-      - ./openvpn-data/config:/etc/openvpn
+      - ./ovpn-data:/local
+      - ./ovpn-data/config:/etc/openvpn
     network_mode: host
     cap_add:
       - NET_ADMIN
