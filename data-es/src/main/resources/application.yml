@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: data-es
+  jdbc:
+    show-sql: true
+
+server:
+  port: 9090

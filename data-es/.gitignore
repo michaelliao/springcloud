@@ -1,0 +1,2 @@
+# ignore elastic search data dir:
+data/
