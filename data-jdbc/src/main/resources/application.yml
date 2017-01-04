@@ -1,6 +1,6 @@
 spring:
   application:
-    name: datajdbc
+    name: data-jdbc
   jdbc:
     show-sql: true
 
