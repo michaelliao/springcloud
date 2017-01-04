@@ -1,6 +1,6 @@
 spring:
   application:
-    name: datajpa
+    name: data-jpa
   # JPA配置:
   jpa:
     show-sql: true
