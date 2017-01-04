@@ -41,7 +41,7 @@ public class MessagingApplication {
 	@Bean
 	public Queue queue() {
 		// durable = false:
-		return new Queue(QUEUE_NAME, false);
+		return new Queue(QUEUE_NAME, false, false, true);
 	}
 
 	@Bean
