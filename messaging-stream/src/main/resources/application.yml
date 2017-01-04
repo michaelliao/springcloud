@@ -8,18 +8,18 @@ spring:
           group: voteGroup
           destination: vote.exchange
           contentType: application/json
-          binder: rabbitBinder
+          binder: rabbitmq
         voteLogInput:
           group: logGroup
           destination: vote.exchange
           contentType: application/json
-          binder: rabbitBinder
+          binder: rabbitmq
         voteOutput:
           destination: vote.exchange
           contentType: application/json
-          binder: rabbitBinder
+          binder: rabbitmq
       binders:
-        rabbitBinder:
+        rabbitmq:
           type: rabbit
           environment:
             spring:
