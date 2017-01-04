@@ -40,7 +40,7 @@ public class MessagingApplication {
 
 	@Bean
 	public Queue queue() {
-		// durable = false:
+		// durable = false, autoDelete = true
 		return new Queue(QUEUE_NAME, false, false, true);
 	}
 

@@ -3,14 +3,6 @@ spring:
     name: stream
   cloud:
     stream:
-      rabbit:
-        bindings:
-          voteInput:
-            consumer:
-              durableSubscription: false
-          voteLogInput:
-            consumer:
-              durableSubscription: false
       bindings:
         voteInput:
           group: voteGroup
