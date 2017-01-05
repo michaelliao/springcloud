@@ -7,32 +7,16 @@ services:
     image: ubuntu:latest
     container_name: ubuntu
 
-  ipsec:
-    image: hwdsl2/ipsec-vpn-server:latest
-    container_name: ipsec
-    ports:
-      - "500:500/udp"
-      - "4500:4500/udp"
-    volumes:
-      - /lib/modules:/lib/modules:ro
-    environment:
-      VPN_IPSEC_PSK: sharedkey
-      VPN_USER: docker
-      VPN_PASSWORD: password
-
   openvpn:
-    image: kylemanna/openvpn:2.0.0
+    # image id: f26b11be63d5
+    image: kylemanna/openvpn:latest
     container_name: openvpn
+    ports:
+      - "1194:1194/udp"
     volumes:
-      - ./ovpn-data:/local
-      - ./ovpn-data/config:/etc/openvpn
-    network_mode: host
+      - ./openvpn-data:/etc/openvpn
     cap_add:
       - NET_ADMIN
-    environment:
-      dest: docker-for-mac.ovpn
-      DEBUG: '1'
-    command: /local/run.sh
 
   mysql:
     image: mysql:5.7

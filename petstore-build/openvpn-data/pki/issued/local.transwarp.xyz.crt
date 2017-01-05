@@ -1,0 +1,83 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 1 (0x1)
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: CN=local
+        Validity
+            Not Before: Jan  5 01:29:52 2017 GMT
+            Not After : Jan  3 01:29:52 2027 GMT
+        Subject: CN=local.transwarp.xyz
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:d8:cd:22:eb:64:2c:3e:10:59:0a:a8:c5:5f:6d:
+                    18:56:09:a1:81:0a:dc:ac:c1:04:cc:3c:38:6e:00:
+                    19:b9:4a:91:6e:22:1c:40:ee:96:63:68:d9:4e:60:
+                    16:5f:ea:ec:15:da:99:92:cf:16:cb:e0:77:0c:b7:
+                    41:ae:96:e9:33:3f:78:53:8c:5c:1d:8d:b0:47:33:
+                    17:9e:8d:2b:84:e1:37:fc:41:f3:2f:07:ec:c7:a1:
+                    02:43:b1:90:f8:ea:20:5d:a4:a5:1b:90:a2:94:78:
+                    7f:9d:96:41:6e:5f:56:08:0b:70:64:e7:8b:c4:05:
+                    09:9d:0a:28:12:ff:f5:da:95:6f:e5:84:08:c2:d8:
+                    b6:1f:15:24:e3:20:5a:ad:c7:04:8f:fb:f3:38:9c:
+                    d7:a8:b6:eb:90:cc:f5:00:ec:85:cd:3f:70:63:1f:
+                    38:b3:d0:6a:f2:ac:51:8d:45:3e:d6:43:91:5e:e0:
+                    14:4c:45:c6:ad:c2:6d:75:88:21:7c:1e:5b:ac:3c:
+                    43:7d:75:0e:03:0f:e0:a8:cf:68:bb:79:fd:86:1b:
+                    82:d3:3f:e9:02:8b:ae:ba:dc:13:e4:df:f6:68:e0:
+                    30:b7:5c:f7:2f:79:bd:e9:eb:02:e1:96:8f:45:d6:
+                    33:a4:06:c9:6f:79:af:be:54:df:ab:de:f2:70:ec:
+                    76:0f
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Subject Key Identifier: 
+                FE:59:BB:5A:2C:B5:83:55:1E:D7:8C:CB:8A:B5:52:E5:C3:07:AE:AC
+            X509v3 Authority Key Identifier: 
+                keyid:53:C3:4E:0B:E3:BD:C3:CA:01:20:34:BA:04:4B:D3:83:16:45:17:7B
+                DirName:/CN=local
+                serial:EA:CC:C1:6A:2A:C1:1E:2A
+
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication
+            X509v3 Key Usage: 
+                Digital Signature, Key Encipherment
+    Signature Algorithm: sha256WithRSAEncryption
+         63:95:25:0d:d1:4e:60:40:74:68:42:d8:8f:72:11:58:12:d7:
+         86:25:90:ce:ab:42:d3:c2:4d:bb:b8:71:b4:eb:86:76:26:7b:
+         ac:99:ce:be:72:cf:9f:5c:5a:d5:d5:05:ef:79:fb:ae:cf:85:
+         22:da:84:96:1b:95:98:16:ee:de:cc:dd:e3:60:d0:68:94:9f:
+         d4:b3:65:b7:d6:06:a0:7c:8d:60:aa:1e:1b:5a:48:6d:98:40:
+         5c:3b:d2:62:77:a8:cb:77:84:34:69:ec:34:c9:9c:de:cf:cf:
+         fe:fe:51:2a:1e:79:10:be:94:36:d1:a7:67:71:03:55:45:7a:
+         9b:ab:de:a7:3b:3d:c8:ed:e1:98:1e:38:26:66:72:a0:a1:dd:
+         ea:b2:dc:82:cd:80:80:97:b9:58:40:a9:97:ee:ca:0e:f0:0d:
+         94:32:02:d8:fb:09:ec:8e:d7:24:dc:5d:2d:88:8a:9a:5a:7b:
+         7a:6e:6c:6e:7d:b4:a5:5e:68:d1:29:92:9c:e4:b9:fe:d6:9d:
+         6a:f7:75:4a:02:b4:c8:bd:a7:53:58:da:95:10:96:e0:d5:06:
+         45:67:97:77:5c:c3:8f:8b:ef:a8:01:49:fb:3a:7c:cf:2e:b4:
+         38:bf:c8:d9:ec:91:5b:d5:d2:5e:88:25:54:5e:68:c0:61:3a:
+         21:99:70:fb
+-----BEGIN CERTIFICATE-----
+MIIDOzCCAiOgAwIBAgIBATANBgkqhkiG9w0BAQsFADAQMQ4wDAYDVQQDDAVsb2Nh
+bDAeFw0xNzAxMDUwMTI5NTJaFw0yNzAxMDMwMTI5NTJaMB4xHDAaBgNVBAMME2xv
+Y2FsLnRyYW5zd2FycC54eXowggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIB
+AQDYzSLrZCw+EFkKqMVfbRhWCaGBCtyswQTMPDhuABm5SpFuIhxA7pZjaNlOYBZf
+6uwV2pmSzxbL4HcMt0GulukzP3hTjFwdjbBHMxeejSuE4Tf8QfMvB+zHoQJDsZD4
+6iBdpKUbkKKUeH+dlkFuX1YIC3Bk54vEBQmdCigS//XalW/lhAjC2LYfFSTjIFqt
+xwSP+/M4nNeotuuQzPUA7IXNP3BjHziz0GryrFGNRT7WQ5Fe4BRMRcatwm11iCF8
+HlusPEN9dQ4DD+Coz2i7ef2GG4LTP+kCi6663BPk3/Zo4DC3XPcveb3p6wLhlo9F
+1jOkBslvea++VN+r3vJw7HYPAgMBAAGjgZEwgY4wCQYDVR0TBAIwADAdBgNVHQ4E
+FgQU/lm7Wiy1g1Ue14zLirVS5cMHrqwwQAYDVR0jBDkwN4AUU8NOC+O9w8oBIDS6
+BEvTgxZFF3uhFKQSMBAxDjAMBgNVBAMMBWxvY2FsggkA6szBairBHiowEwYDVR0l
+BAwwCgYIKwYBBQUHAwEwCwYDVR0PBAQDAgWgMA0GCSqGSIb3DQEBCwUAA4IBAQBj
+lSUN0U5gQHRoQtiPchFYEteGJZDOq0LTwk27uHG064Z2Jnusmc6+cs+fXFrV1QXv
+efuuz4Ui2oSWG5WYFu7ezN3jYNBolJ/Us2W31gagfI1gqh4bWkhtmEBcO9Jid6jL
+d4Q0aew0yZzez8/+/lEqHnkQvpQ20adncQNVRXqbq96nOz3I7eGYHjgmZnKgod3q
+styCzYCAl7lYQKmX7soO8A2UMgLY+wnsjtck3F0tiIqaWnt6bmxufbSlXmjRKZKc
+5Ln+1p1q93VKArTIvadTWNqVEJbg1QZFZ5d3XMOPi++oAUn7OnzPLrQ4v8jZ7JFb
+1dJeiCVUXmjAYTohmXD7
+-----END CERTIFICATE-----
