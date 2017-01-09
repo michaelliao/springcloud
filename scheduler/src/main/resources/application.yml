@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: scheduler
+
+server:
+  port: 9090
