@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: hello
+
+server:
+  port: 9090
+
+fetch:
+  proxies:
+    office:
+      name: Office Internal Use
+      host: office.proxy.example.com
+      headers:
+        - UserName
+        - UserToken
+    www:
+      name: ${PUBLIC_PROXY:Access Internet}
+      host: internet.proxy.example.com
+      port: 8080
+      headers:
+        - FromAddress
+        - AuthToken
+    test:
+      name: Test Only
+      host: test.proxy.example.com
