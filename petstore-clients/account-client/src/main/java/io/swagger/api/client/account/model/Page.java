@@ -62,15 +62,6 @@ public class Page<T> {
     public void setSize(Integer size) {
         this.size = size;
     }
-    private Sort sort;
-
-    public Sort getSort() {
-        return this.sort;
-    }
-    
-    public void setSort(Sort sort) {
-        this.sort = sort;
-    }
     private Long totalElements;
 
     public Long getTotalElements() {

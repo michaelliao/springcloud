@@ -14,31 +14,15 @@ public interface AccountClient {
     static final String NAME = "account";
 
 
-    @RequestMapping(value="/api/ex", method=RequestMethod.GET)
-    String testEx();
-
-  
-    @RequestMapping(value="/api/test", method=RequestMethod.GET)
-    String test();
-
-  
-    @RequestMapping(value="/api/test2", method=RequestMethod.GET)
-    String test2(@RequestParam(value="e", required=true) String e, @RequestParam(value="ee", required=true) Integer ee);
-
-  
-    @RequestMapping(value="/api/users", method=RequestMethod.GET)
+    @RequestMapping(value="/api/account/users", method=RequestMethod.GET)
     Page<User> getUsers(@RequestParam(value="page", defaultValue="0", required=false) Integer page);
 
   
-    @RequestMapping(value="/api/users", method=RequestMethod.POST)
+    @RequestMapping(value="/api/account/users", method=RequestMethod.POST)
     User createUser(@RequestBody(required=true) UserBean bean);
 
   
-    @RequestMapping(value="/api/users/{id}", method=RequestMethod.GET)
+    @RequestMapping(value="/api/account/users/{id}", method=RequestMethod.GET)
     User getUser(@PathVariable(value="id", required=true) String id);
-
-  
-    @RequestMapping(value="/api/users2", method=RequestMethod.POST)
-    User createUser2(@RequestParam(value="aa", required=true) java.time.LocalDateTime aa, @RequestBody(required=true) UserBean bean);
 
   }
