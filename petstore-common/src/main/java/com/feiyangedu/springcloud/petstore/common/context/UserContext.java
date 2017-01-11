@@ -1,11 +1,15 @@
 package com.feiyangedu.springcloud.petstore.common.context;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserContext implements AutoCloseable {
 
-	static final ThreadLocal<UserInfo> threadLocal = new ThreadLocal<>();
+	static final ThreadLocal<List<UserInfo>> threadLocal = new ThreadLocal<>();
 
 	public static UserInfo getCurrentUserInfo() {
-		return threadLocal.get();
+		List<UserInfo> list = threadLocal.get();
+		return list == null || list.isEmpty() ? null : list.get(list.size() - 1);
 	}
 
 	public static UserInfo getRequiredCurrentUserInfo() {
@@ -17,12 +21,22 @@ public class UserContext implements AutoCloseable {
 	}
 
 	public UserContext(UserInfo userInfo) {
-		threadLocal.set(userInfo);
+		List<UserInfo> list = threadLocal.get();
+		if (list == null) {
+			list = new ArrayList<>(3);
+			threadLocal.set(list);
+		}
+		list.add(userInfo);
 	}
 
 	@Override
 	public void close() {
-		threadLocal.remove();
+		List<UserInfo> list = threadLocal.get();
+		if (list.size() > 1) {
+			list.remove(list.size() - 1);
+		} else {
+			threadLocal.remove();
+		}
 	}
 
 }
