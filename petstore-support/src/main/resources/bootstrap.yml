@@ -3,12 +3,5 @@ spring:
     name: support
   cloud:
     config:
+      uri: ${CONFIG_SERVER:http://localhost:8888}
       fail-fast: true
-
-server:
-  port: 9006
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${spring.eureka.server.serviceUrl}

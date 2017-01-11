@@ -3,12 +3,5 @@ spring:
     name: batch
   cloud:
     config:
+      uri: ${CONFIG_SERVER:http://localhost:8888}
       fail-fast: true
-
-server:
-  port: 9003
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${spring.eureka.server.serviceUrl}

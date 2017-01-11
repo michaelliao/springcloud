@@ -1,8 +1,6 @@
 spring:
   application:
     name: web
-  profiles:
-    active: ${PROFILES:native}
   cloud:
     config:
       uri: ${CONFIG_SERVER:http://localhost:8888}

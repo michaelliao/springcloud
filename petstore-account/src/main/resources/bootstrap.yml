@@ -1,9 +1,7 @@
 spring:
   application:
     name: account
-  profiles:
-    active: ${PROFILES:native}
   cloud:
     config:
-      uri: http://${CONFIG_SERVER:localhost}:8888
+      uri: ${CONFIG_SERVER:http://localhost:8888}
       fail-fast: true
