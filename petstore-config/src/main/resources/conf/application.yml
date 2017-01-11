@@ -22,6 +22,14 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
 
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000
+
 eureka:
   instance:
     preferIpAddress: true
