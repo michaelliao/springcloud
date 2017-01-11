@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.feiyangedu.springcloud.petstore.account.bean.UserBean;
 import com.feiyangedu.springcloud.petstore.account.domain.User;
 import com.feiyangedu.springcloud.petstore.account.repository.UserRepository;
+import com.feiyangedu.springcloud.petstore.common.context.UserContext;
+import com.feiyangedu.springcloud.petstore.common.context.UserInfo;
 import com.feiyangedu.springcloud.petstore.common.service.AbstractService;
 import com.feiyangedu.springcloud.petstore.common.util.BeanUtil;
 
@@ -43,9 +45,11 @@ public class AccountService extends AbstractService {
 
 	@PostMapping("/users")
 	public User createUser(@RequestBody UserBean bean) {
-		User user = new User();
-		BeanUtil.copyPublicFields(bean, user);
-		userRepository.save(user);
-		return user;
+		try (UserContext ctx = new UserContext(UserInfo.SYSTEM)) {
+			User user = new User();
+			BeanUtil.copyPublicFields(bean, user);
+			userRepository.save(user);
+			return user;
+		}
 	}
 }
