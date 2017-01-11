@@ -2,6 +2,11 @@ package com.feiyangedu.springcloud.petstore.common.config;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -22,8 +27,10 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.feiyangedu.springcloud.petstore.common.exception.APIException;
 import com.feiyangedu.springcloud.petstore.common.filter.UserContextFilter;
 import com.feiyangedu.springcloud.petstore.common.rest.RestExceptionHandler;
+import com.netflix.hystrix.exception.HystrixBadRequestException;
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -33,10 +40,13 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+@Aspect
 @Configuration
 @EnableSwagger2
 @EnableDiscoveryClient
 public class CustomWebConfig {
+
+	final Log log = LogFactory.getLog(getClass());
 
 	@Bean
 	public Docket createSwaggerDocket() {
@@ -49,6 +59,25 @@ public class CustomWebConfig {
 				.contact(new Contact("Liao Xuefeng", "http://www.liaoxuefeng.com", "askxuefeng@gmail.com"))
 				.license("Apache 2.0").licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
 				.description("Petstore Sample Application on Spring Cloud").build();
+	}
+
+	@Around("execution(* com..*FeignClient.*(..))")
+	public Object processFeignClientResult(ProceedingJoinPoint pjp) throws Throwable {
+		log.info("Invoke feign client...");
+		try {
+			return pjp.proceed();
+		} catch (HystrixBadRequestException e) {
+			Throwable t = e.getCause();
+			if (t instanceof APIException) {
+				log.warn("Convert HystrixBadRequestException to APIException.");
+				throw t;
+			}
+			log.warn("HystrixBadRequestException", e);
+			throw e;
+		} catch (Exception e) {
+			log.warn(e.getClass(), e);
+			throw e;
+		}
 	}
 
 	@Bean

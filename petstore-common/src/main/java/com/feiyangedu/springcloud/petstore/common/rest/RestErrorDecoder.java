@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.feiyangedu.springcloud.petstore.common.exception.APIException;
+import com.netflix.hystrix.exception.HystrixBadRequestException;
 
 import feign.Response;
 import feign.codec.ErrorDecoder;
@@ -28,7 +29,8 @@ public class RestErrorDecoder implements ErrorDecoder {
 				if (contentType != null && contentType.startsWith("application/json")) {
 					try (Reader reader = response.body().asReader()) {
 						APIErrorResponse resp = objectMapper.readValue(reader, APIErrorResponse.class);
-						return new APIException(resp.code, resp.message);
+						return new HystrixBadRequestException("APIException",
+								new APIException(resp.code, resp.message));
 					} catch (IOException e) {
 						return new RuntimeException(e);
 					}
