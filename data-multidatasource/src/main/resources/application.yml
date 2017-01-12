@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: data-multidatasource
+  datasource:
+    driver-class-name: org.hsqldb.jdbc.JDBCDriver
+    url: jdbc:hsqldb:mem:db1
+    username: sa
+    password:
+  second-datasource:
+    driver-class-name: org.hsqldb.jdbc.JDBCDriver
+    url: jdbc:hsqldb:mem:db2
+    username: sa
+    password:
+
+server:
+  port: 9090
