@@ -1,8 +1,6 @@
 spring:
   application:
     name: data-jdbc
-  jdbc:
-    show-sql: true
 
 server:
   port: 9090
