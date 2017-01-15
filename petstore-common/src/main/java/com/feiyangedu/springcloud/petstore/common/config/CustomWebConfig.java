@@ -61,6 +61,9 @@ public class CustomWebConfig {
 				.description("Petstore Sample Application on Spring Cloud").build();
 	}
 
+	/**
+	 * Convert HystrixBadRequestException to APIException using AspectJ.
+	 */
 	@Around("execution(* com..*FeignClient.*(..))")
 	public Object processFeignClientResult(ProceedingJoinPoint pjp) throws Throwable {
 		log.info("Invoke feign client...");
