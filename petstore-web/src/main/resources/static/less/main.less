@@ -1,0 +1,110 @@
+// main.less
+
+@import "uikit/themes/almost-flat/uikit.less";
+
+@import "uikit/src/less/components/tooltip.less";
+@import "uikit/themes/almost-flat/tooltip.less";
+
+@import "uikit/src/less/components/notify.less";
+@import "uikit/themes/almost-flat/notify.less";
+
+@import "uikit/src/less/components/progress.less";
+@import "uikit/themes/almost-flat/progress.less";
+
+@import "uikit/src/less/components/datepicker.less";
+@import "uikit/themes/almost-flat/datepicker.less";
+
+// customized less ////////////////////////////////////////////////////////////
+
+#q {
+	padding-bottom: 6px;
+	border: none;
+	border-bottom: 1px solid #ad2222;
+	background-color: transparent;
+	&:focus {
+		outline: none;
+	}
+}
+
+// override uikit /////////////////////////////////////////////////////////////
+
+@base-body-font-family:                         STSong, SimSun, NSimSun;
+@base-heading-font-family:                      STSong, SimSun, NSimSun;
+
+// customize variables.less
+
+@base-body-background:                          #fffaf0;
+@base-body-color:                               #444;
+
+@global-link-color:                             #ad2222;
+@global-link-hover-color:                       darken(@global-link-color, 10%);
+
+@base-link-hover-text-decoration:               none;
+
+.hook-base-link-hover() {
+	text-shadow: 1px 1px 5px lighten(@global-link-hover-color, 50%);
+}
+
+// customize button.less
+
+@button-disabled-color:                         darken(@global-contrast-color, 30%);
+
+.hook-button-disable() {
+    border-color: @button-border;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+
+// grid.less
+
+@grid-gutter-large-horizontal: @grid-gutter-horizontal;
+@grid-gutter-large-vertical:   @grid-gutter-vertical;
+
+
+// customize utility.less /////////////////////////////////////////////////////
+
+@utility-container-max-width:                   960px;
+@utility-container-padding-horizontal:          0px;
+
+@utility-container-large-max-width:             960px;
+@utility-container-large-padding-horizontal:    0px;
+
+.hook-container() {
+    width: 960px !important;
+}
+
+// customize navbar.less //////////////////////////////////////////////////////
+
+@navbar-background:              #0593d3;
+@navbar-hover-background:		 #0482ba;
+
+@navbar-nav-color:               @global-contrast-color;
+@navbar-nav-font-size:           @global-font-size;
+
+@navbar-nav-hover-background:    @navbar-hover-background;
+@navbar-nav-hover-color:         @global-contrast-color;
+
+@navbar-nav-onclick-background:  darken(@navbar-hover-background, 5%);
+@navbar-nav-onclick-color:       @global-contrast-color;
+
+@navbar-nav-active-background:   @navbar-hover-background;
+@navbar-nav-active-color:        @global-contrast-color;
+
+@navbar-text-shadow:             none;
+
+@navbar-brand-font-size:         24px;
+@navbar-brand-color:             @global-contrast-color;
+@navbar-brand-hover-color:       @global-contrast-color;
+
+.uk-navbar-brand {
+    padding-left: 5px;
+}
+
+.hook-navbar-nav-hover() {
+    position: relative; // 1
+    border-left-color:  darken(@navbar-hover-background, 5%);
+    border-right-color: darken(@navbar-hover-background, 5%);
+    background-color:   @navbar-hover-background;
+    color: #fff;
+}
