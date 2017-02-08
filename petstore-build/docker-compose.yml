@@ -4,8 +4,7 @@ version: "2"
 
 services:
   openvpn:
-    # image id: f26b11be63d5
-    image: kylemanna/openvpn:latest
+    image: kylemanna/openvpn:2.0.0
     container_name: openvpn
     ports:
       - "1194:1194/udp"
@@ -24,7 +23,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: petstore
-    character-set-server: utf8mb4
+      character-set-server: utf8mb4
 
   redis:
     image: redis:3.2
