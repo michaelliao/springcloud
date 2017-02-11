@@ -1,17 +1,30 @@
 #!/bin/sh
 
-echo "Build Maven packages..."
-# mvn clean package
+echo "build maven packages..."
+mvn clean package
 
-echo "Build docker images..."
+echo "build docker images..."
 
-echo "Prepare volumes..."
-mkdir -p ./mysql-data
-chmod 777 ./mysql-data
+(cd ../petstore-eureka && exec mvn docker:build)
+(cd ../petstore-config && exec mvn docker:build)
 
-echo "Pull 3rd-party images..."
-docker pull redis:3.2
-docker pull mysql:5.7
+MYSQL_DATA_VOLUME="./mysql-data"
 
-echo "Start mysql..."
+if [ -d $MYSQL_DATA_VOLUME ]; then
+  echo "mysql data volume exist."
+else
+  echo "prepare mysql data volume..."
+  mkdir -p $MYSQL_DATA_VOLUME
+  chmod 777 $MYSQL_DATA_VOLUME
+fi
+
+echo "start mysql..."
+
+docker-compose stop mysql
 docker-compose up -d mysql
+
+echo "start rabbitmq..."
+
+docker-compose stop rabbitmq
+docker-compose up -d rabbitmq
+

@@ -3,9 +3,14 @@
 version: "2"
 
 services:
+
+  # BEGIN 3rd-part Apps #######################################################
+
   openvpn:
     image: kylemanna/openvpn:2.0.0
     container_name: openvpn
+    networks:
+      - devnet
     ports:
       - "1194:1194/udp"
     volumes:
@@ -16,6 +21,9 @@ services:
   mysql:
     image: mysql:5.7
     container_name: mysql
+    networks:
+      devnet:
+        ipv4_address: 172.27.0.101
     ports:
       - "3306:3306"
     volumes:
@@ -28,18 +36,29 @@ services:
   redis:
     image: redis:3.2
     container_name: redis
+    networks:
+      devnet:
+        ipv4_address: 172.27.0.102
     ports:
       - "6379:6379"
 
   rabbitmq:
     image: rabbitmq:3.6-management
     container_name: rabbitmq
+    networks:
+      devnet:
+        ipv4_address: 172.27.0.103
     ports:
       - "15672:15672"
+
+  # BEGIN Spring Cloud Apps ###################################################
 
   eureka:
     image: petstore-eureka:0.0.1-SNAPSHOT
     container_name: petstore-eureka
+    networks:
+      devnet:
+        ipv4_address: 172.27.0.201
     ports:
       - "8761:8761"
     volumes:
@@ -48,15 +67,37 @@ services:
   config:
     image: petstore-config:0.0.1-SNAPSHOT
     container_name: petstore-config
+    networks:
+      devnet:
+        ipv4_address: 172.27.0.202
     ports:
       - "8888:8888"
+    volumes:
+      - /tmp
+
+  gateway:
+    image: petstore-gateway:0.0.1-SNAPSHOT
+    container_name: petstore-gateway
+    networks:
+      - devnet
+    ports:
+      - "9000:9000"
     volumes:
       - /tmp
 
   account:
     image: petstore-account:0.0.1-SNAPSHOT
     container_name: petstore-account
+    networks:
+      - devnet
     ports:
       - "9001:9001"
     volumes:
       - /tmp
+
+networks:
+  devnet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.27.0.0/16

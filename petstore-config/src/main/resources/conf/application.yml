@@ -1,8 +1,9 @@
 # spring公共配置:
+
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/petstore?useSSL=false&autoReconnect=true
+    url: jdbc:mysql://172.27.0.101:3306/petstore?useSSL=false&autoReconnect=true
     username: root
     # 需要加密的配置信息通过命令获取加密后的字符串:
     # curl -d 'original string' http://localhost:8888/encrypt
