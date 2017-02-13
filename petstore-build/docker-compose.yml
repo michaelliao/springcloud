@@ -10,7 +10,8 @@ services:
     image: kylemanna/openvpn:2.0.0
     container_name: openvpn
     networks:
-      - devnet
+      devnet:
+        ipv4_address: 172.27.0.100
     ports:
       - "1194:1194/udp"
     volumes:
@@ -24,8 +25,6 @@ services:
     networks:
       devnet:
         ipv4_address: 172.27.0.101
-    ports:
-      - "3306:3306"
     volumes:
       - ./mysql-data:/var/lib/mysql
     environment:
@@ -80,8 +79,6 @@ services:
     container_name: petstore-gateway
     networks:
       - devnet
-    ports:
-      - "9000:9000"
     volumes:
       - /tmp
 
@@ -90,8 +87,6 @@ services:
     container_name: petstore-account
     networks:
       - devnet
-    ports:
-      - "9001:9001"
     volumes:
       - /tmp
 
