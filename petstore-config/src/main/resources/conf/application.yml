@@ -1,12 +1,13 @@
-# spring公共配置:
+### application config for native profile ###
 
+# spring config:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://172.27.0.101:3306/petstore?useSSL=false&autoReconnect=true
+    url: jdbc:mysql://${MYSQL_IP}:3306/petstore?useSSL=false&autoReconnect=true
     username: root
-    # 需要加密的配置信息通过命令获取加密后的字符串:
-    # curl -d 'original string' http://localhost:8888/encrypt
+    # get encrypted string by:
+    # curl -d 'original-string' http://<config-server>:8888/encrypt
     password: '{cipher}b38de5599e160c5d83ef67f9ba660f1a77c0e8527dba9d2dd99bc59e564e2bb8'
   jpa:
     show-sql: true
@@ -14,7 +15,8 @@ spring:
     properties:
       javax:
         persistence:
-          # 自动生成DDL脚本:
+          # generate DDL script under target/init.sql,
+          # but not execute on startup:
           schema-generation:
             create-source: metadata
             scripts:
@@ -23,9 +25,11 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
 
+# default http port is set to 8080:
 server:
   port: 8080
 
+# timeout for rest invocation:
 hystrix:
   command:
     default:
@@ -34,9 +38,10 @@ hystrix:
           thread:
             timeoutInMilliseconds: 2000
 
+# eureka config:
 eureka:
   instance:
     preferIpAddress: true
   client:
     serviceUrl:
-      defaultZone: http://172.27.0.201:8761/eureka/
+      defaultZone: http://${EUREKA_IP}:8761/eureka/

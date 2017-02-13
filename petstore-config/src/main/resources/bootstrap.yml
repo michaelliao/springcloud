@@ -1,3 +1,4 @@
+# config server port:
 server:
   port: 8888
 
@@ -8,7 +9,7 @@ spring:
     active: ${ENV:native}
 
 encrypt:
-  # 使用环境变量或默认值作为key:
+  # encrypted key from env or using default:
   key: ${SPRING_ENCRYPT_KEY:SecretKey4PetStore}
 
 eureka:
@@ -16,7 +17,7 @@ eureka:
     preferIpAddress: true
   client:
     serviceUrl:
-      defaultZone: http://172.27.0.201:8761/eureka/
+      defaultZone: http://${EUREKA_IP}:8761/eureka/
 
 ---
 
@@ -40,16 +41,4 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/michaelliao/springcloud-test-config.git
-
----
-
-# 定义一个production profiles，使用git配置:
-
-spring:
-  profiles: prod
-  cloud:
-    config:
-      server:
-        git:
-          uri: https://github.com/michaelliao/springcloud-prod-config.git
+          uri: https://github.com/michaelliao/springcloud-config.git

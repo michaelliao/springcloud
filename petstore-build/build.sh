@@ -5,8 +5,14 @@ mvn clean package
 
 echo "build docker images..."
 
-(cd ../petstore-eureka && exec mvn docker:build)
+(cd ../petstore-account && exec mvn docker:build)
 (cd ../petstore-config && exec mvn docker:build)
+(cd ../petstore-eureka && exec mvn docker:build)
+(cd ../petstore-gateway && exec mvn docker:build)
+(cd ../petstore-product && exec mvn docker:build)
+(cd ../petstore-search && exec mvn docker:build)
+(cd ../petstore-support && exec mvn docker:build)
+(cd ../petstore-web && exec mvn docker:build)
 
 MYSQL_DATA_VOLUME="./mysql-data"
 
@@ -20,11 +26,9 @@ fi
 
 echo "start mysql..."
 
-docker-compose stop mysql
 docker-compose up -d mysql
 
 echo "start rabbitmq..."
 
-docker-compose stop rabbitmq
 docker-compose up -d rabbitmq
 

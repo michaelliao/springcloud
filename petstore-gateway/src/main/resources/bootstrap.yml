@@ -5,5 +5,5 @@ spring:
     active: ${PROFILES:native}
   cloud:
     config:
-      uri: ${CONFIG_SERVER:http://172.27.0.202:8888}
+      uri: http://${CONFIG_IP}:8888
       fail-fast: true
