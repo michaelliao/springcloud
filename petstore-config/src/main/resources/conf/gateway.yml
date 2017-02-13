@@ -1,5 +1,4 @@
-server:
-  port: 9000
+# gateway service
 
 zuul:
   ignoredServices: "*"

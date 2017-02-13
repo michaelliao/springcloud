@@ -43,7 +43,7 @@ services:
       - "6379:6379"
 
   rabbitmq:
-    image: rabbitmq:3.6-management
+    image: rabbitmq:3.6.6-management
     container_name: rabbitmq
     networks:
       devnet:

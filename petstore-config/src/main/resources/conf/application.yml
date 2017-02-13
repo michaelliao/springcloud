@@ -23,6 +23,9 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
 
+server:
+  port: 8080
+
 hystrix:
   command:
     default:
@@ -36,4 +39,4 @@ eureka:
     preferIpAddress: true
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://172.27.0.201:8761/eureka/
