@@ -11,6 +11,13 @@ encrypt:
   # 使用环境变量或默认值作为key:
   key: ${SPRING_ENCRYPT_KEY:SecretKey4PetStore}
 
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    serviceUrl:
+      defaultZone: http://172.27.0.201:8761/eureka/
+
 ---
 
 # native configuration:
