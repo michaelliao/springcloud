@@ -15,8 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -68,7 +67,7 @@ public class MessagingApplication {
 		log.info(String.format(s, content, n));
 	}
 
-	@RequestMapping(value = "/send", method = RequestMethod.GET)
+	@GetMapping(value = "/send")
 	String sendMessage(@RequestParam(name = "message", defaultValue = "") String message) {
 		if (message.isEmpty()) {
 			message = "Message<" + UUID.randomUUID().toString() + ">";
