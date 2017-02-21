@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Send Mail App</title>
+	<link rel="stylesheet" href="/static/css/uikit.css">
+	<script src="/static/js/jquery.js"></script>
+	<script src="/static/js/uikit.js"></script>
+</head>
+<body>
+	<div class="uk-navbar uk-navbar-attached">
+		<div class="uk-container uk-container-center">
+			<a href="/" class="uk-navbar-brand">SpringCloud</a>
+			<ul class="uk-navbar-nav">
+				<li><a target="_blank" href="http://www.liaoxuefeng.com/">Get Started</a></li>
+				<li><a target="_blank" href="https://github.com/michaelliao/springcloud">Source</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="uk-container uk-container-center">
+		<div class="uk-grid">
+			<div class="uk-width-1-1">
+				<h1>Sending Email</h1>
+				<form name="mail" method="post" action="/send" target="_blank" class="uk-form uk-form-stacked">
+					<div class="uk-form-row">
+						<label class="uk-form-label">To:</label>
+						<div class="uk-form-controls">
+							<input name="to" placeholder="to@example.com" class="uk-width-1-2">
+						</div>
+					</div>
+					<div class="uk-form-row">
+						<label class="uk-form-label">Subject:</label>
+						<div class="uk-form-controls">
+							<input name="subject" placeholder="Subject" class="uk-width-1-2">
+						</div>
+					</div>
+					<div class="uk-form-row">
+						<label class="uk-form-label">Content:</label>
+						<div class="uk-form-controls">
+							<textarea name="body" rows="10" placeholder="Blablabla..." class="uk-width-1-2" style="resize:none;"></textarea>
+						</div>
+					</div>
+					<div class="uk-form-row">
+						<div class="uk-form-controls">
+							<button type="submit" value="Send" class="uk-button uk-button-primary">Send</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

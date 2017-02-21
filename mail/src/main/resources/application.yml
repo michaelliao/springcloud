@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: sendmail
+  mail:
+    host: smtp.sina.com
+    port: 465
+    protocol: smtp
+    username: springcloudmail@sina.com
+    password: DoNotChangeMe
+    properties:
+      mail.smtp.socketFactory.port: 465
+      mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
+      mail.smtp.auth: true
+      mail.debug: true
+  freemarker:
+    suffix: .html
+    cache: false
+    settings:
+      output_format: HTMLOutputFormat
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+server:
+  port: 9090
