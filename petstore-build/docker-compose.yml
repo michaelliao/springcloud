@@ -21,6 +21,7 @@ services:
   mysql:
     image: mysql:5.7
     container_name: mysql
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
     networks:
       devnet:
         ipv4_address: $MYSQL_IP
@@ -29,7 +30,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: petstore
-      character-set-server: utf8mb4
 
   redis:
     image: redis:3.2
