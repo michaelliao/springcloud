@@ -118,7 +118,7 @@
 							<imageTag>${project.version}</imageTag>
 						</imageTags>
 						<!-- Dockerfile文件所在目录 -->
-						<dockerDirectory>docker</dockerDirectory>
+						<dockerDirectory>../petstore-parent</dockerDirectory>
 						<resources>
 							<resource>
 								<targetPath>/</targetPath>
