@@ -5,11 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Import;
 
-import com.feiyangedu.springcloud.petstore.common.config.CustomWebConfig;
+import com.feiyangedu.springcloud.petstore.common.config.CustomWebConfiguration;
 
 @SpringBootApplication
 @EnableFeignClients
-@Import(CustomWebConfig.class)
+@Import(CustomWebConfiguration.class)
 public class WebApplication {
 
 	public static void main(String[] args) {
