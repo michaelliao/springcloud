@@ -1,16 +1,22 @@
 package com.feiyangedu.springcloud.petstore.gateway.filter;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 
+import com.feiyangedu.springcloud.petstore.common.context.UserInfo;
+import com.feiyangedu.springcloud.petstore.common.util.CookieUtil;
+import com.feiyangedu.springcloud.petstore.common.util.JsonUtil;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 
 /**
- * Decode token as user info.
+ * Get user info from cookie.
  * 
  * @author Michael Liao
  */
@@ -32,13 +38,27 @@ public class UserFilter extends ZuulFilter {
 	@Override
 	public Object run() {
 		log.info("check token...");
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		RequestContext ctx = RequestContext.getCurrentContext();
+		HttpServletRequest request = ctx.getRequest();
+		UserInfo user = null;
+		String s = CookieUtil.getAuthTokenFromCookie(request);
+		if (s != null) {
+			try {
+				String decoded = new String(Base64.getUrlDecoder().decode(s), StandardCharsets.UTF_8);
+				user = JsonUtil.readJson(decoded, UserInfo.class);
+			} catch (Exception e) {
+				log.warn("Invalid token", e);
+				// TODO: delete cookie:
+			}
 		}
-		log.info("done.");
+		if (user != null) {
+			log.info("set user: " + user.toString());
+			String str = JsonUtil.writeJson(user);
+			ctx.addZuulRequestHeader("X-USER-INFO",
+					Base64.getUrlEncoder().encodeToString(str.getBytes(StandardCharsets.UTF_8)));
+		} else {
+			log.info("set user = null.");
+		}
 		return null;
 	}
 
