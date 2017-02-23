@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.feiyangedu.springcloud.petstore.common.context.UserContext;
 import com.feiyangedu.springcloud.petstore.common.context.UserInfo;
@@ -34,19 +36,22 @@ public class UserContextFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
 			throws IOException, ServletException {
+		UserInfo user = null;
 		HttpServletRequest request = (HttpServletRequest) req;
-		String base64UserInfo = request.getHeader("X-User-Info");
-		UserInfo userInfo = null;
-		if (base64UserInfo != null) {
+		String auth = request.getHeader("Authorization");
+		if (auth != null && auth.startsWith("Bearer ")) {
+			String token = auth.substring(7);
 			try {
-				byte[] data = Base64.getDecoder().decode(base64UserInfo);
-				userInfo = objectMapper.readValue(data, 0, data.length, UserInfo.class);
-			} catch (Exception e) {
-				log.warn("Error decode X-User-Info.", e);
+				byte[] data = Base64.getUrlDecoder().decode(token);
+				user = objectMapper.readValue(data, UserInfo.class);
+				log.info("Parsed user: " + user);
+			} catch (IllegalArgumentException | JsonParseException | JsonMappingException e) {
+				log.warn("Parse token failed: " + token);
 			}
+		} else {
+			log.info("Invalid Authorization header. set user = null.");
 		}
-		log.info("Process request with user info: " + userInfo);
-		try (UserContext ctx = new UserContext(userInfo)) {
+		try (UserContext ctx = new UserContext(user)) {
 			chain.doFilter(req, resp);
 		}
 	}

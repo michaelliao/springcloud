@@ -1,5 +1,7 @@
 package com.feiyangedu.springcloud.petstore.common.config;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -13,25 +15,24 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.feiyangedu.springcloud.petstore.common.context.UserContext;
+import com.feiyangedu.springcloud.petstore.common.context.UserInfo;
 import com.feiyangedu.springcloud.petstore.common.exception.APIException;
 import com.feiyangedu.springcloud.petstore.common.filter.UserContextFilter;
 import com.feiyangedu.springcloud.petstore.common.rest.RestExceptionHandler;
+import com.feiyangedu.springcloud.petstore.common.util.JsonUtil;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
 
+import feign.RequestInterceptor;
+import feign.RequestTemplate;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -41,10 +42,10 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Aspect
-@Configuration
 @EnableSwagger2
 @EnableDiscoveryClient
-public class CustomWebConfig {
+@Configuration
+public class CustomWebConfiguration {
 
 	final Log log = LogFactory.getLog(getClass());
 
@@ -103,22 +104,32 @@ public class CustomWebConfig {
 		return registration;
 	}
 
+	@Bean
+	public RequestInterceptor feignRequestInterceptor() {
+		return new RequestInterceptor() {
+			@Override
+			public void apply(RequestTemplate templ) {
+				UserInfo user = UserContext.getCurrentUserInfo();
+				if (user != null) {
+					String s = null;
+					try {
+						s = objectMapper.writeValueAsString(user);
+					} catch (JsonProcessingException e) {
+						throw new RuntimeException(e);
+					}
+					templ.header("Authorization",
+							"Bearer " + Base64.getUrlEncoder().encodeToString(s.getBytes(StandardCharsets.UTF_8)));
+				}
+			}
+		};
+	}
+
 	/**
 	 * Customized JSON ObjectMapper.
 	 */
 	@Bean
 	public ObjectMapper objectMapper() {
-		final ObjectMapper mapper = new ObjectMapper();
-		mapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);
-		// ignored properties: Page.sort
-		mapper.addMixIn(Page.class, PageMixIn.class);
-		// disabled features:
-		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-		mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
-		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-		// add java8 time support:
-		mapper.registerModule(new JavaTimeModule());
-		return mapper;
+		return JsonUtil.objectMapper;
 	}
 
 	@Autowired
@@ -148,11 +159,4 @@ public class CustomWebConfig {
 			}
 		};
 	}
-}
-
-abstract class PageMixIn {
-
-	@JsonIgnore
-	public abstract Sort getSort(); // we don't need it!
-
 }

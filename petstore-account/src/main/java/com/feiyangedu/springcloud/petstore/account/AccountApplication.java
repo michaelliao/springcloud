@@ -5,11 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.feiyangedu.springcloud.petstore.common.config.CustomWebConfig;
+import com.feiyangedu.springcloud.petstore.common.config.CustomWebConfiguration;
 
 @SpringBootApplication
 @EnableJpaRepositories
-@Import(CustomWebConfig.class)
+@Import(CustomWebConfiguration.class)
 public class AccountApplication {
 
 	public static void main(String[] args) {
