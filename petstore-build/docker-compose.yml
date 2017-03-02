@@ -53,8 +53,6 @@ services:
     networks:
       devnet:
         ipv4_address: $EUREKA_IP
-    ports:
-      - "8761:8761"
     volumes:
       - /tmp
 
