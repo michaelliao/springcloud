@@ -45,6 +45,25 @@ services:
       devnet:
         ipv4_address: $RABBITMQ_IP
 
+  es:
+    image: elasticsearch:5.2.2
+    container_name: es
+    networks:
+      devnet:
+        ipv4_address: $ES_IP
+    volumes:
+      - ./es-data:/usr/share/elasticsearch/data
+
+  kibana:
+    image: kibana:5.2.2
+    container_name: kibana
+    networks:
+      devnet:
+        ipv4_address: $KIBANA_IP
+    environment:
+      ELASTICSEARCH_URL: http://$ES_IP:9200
+
+
   # BEGIN Spring Cloud Apps ###################################################
 
   eureka:
