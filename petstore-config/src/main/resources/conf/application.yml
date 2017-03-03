@@ -25,6 +25,10 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
   sleuth:
+    enabled: true
+    hystrix:
+      strategy:
+        enabled: false
     stream:
       enabled: true
   rabbitmq:

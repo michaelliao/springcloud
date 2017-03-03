@@ -1,0 +1,14 @@
+# zipkin server
+
+spring:
+  sleuth:
+    # do not trace zipkin server itself:
+    enabled: false
+    #refer to org.springframework.cloud.sleuth.instrument.hystrix.SleuthHystrixAutoConfiguration.java
+    hystrix:
+      strategy:
+        enabled: false
+  zipkin:
+    storage:
+      # type: mem, mysql
+      type: mem

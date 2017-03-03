@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: zipkin
+  profiles:
+    active: ${PROFILES:native}
+  cloud:
+    config:
+      uri: http://${CONFIG_IP:172.27.0.202}:8888
+      fail-fast: true
