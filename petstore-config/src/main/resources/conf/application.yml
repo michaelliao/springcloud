@@ -26,6 +26,8 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
   sleuth:
     enabled: true
+    sampler:
+      percentage: 0.1
     hystrix:
       strategy:
         enabled: false
