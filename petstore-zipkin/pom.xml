@@ -9,15 +9,28 @@
 		<relativePath>../petstore-parent/pom.xml</relativePath>
 	</parent>
 
-	<artifactId>petstore-account</artifactId>
+	<artifactId>petstore-zipkin</artifactId>
 	<packaging>jar</packaging>
-	<name>petstore-account</name>
+	<name>petstore-zipkin</name>
 
 	<dependencies>
 		<dependency>
-			<groupId>com.feiyangedu.springcloud</groupId>
-			<artifactId>petstore-common</artifactId>
-			<version>${project.version}</version>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+		<!-- 引入Zipkin Server -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-sleuth-zipkin-stream</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.zipkin.java</groupId>
+			<artifactId>zipkin-autoconfigure-ui</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 

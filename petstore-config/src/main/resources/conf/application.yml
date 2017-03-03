@@ -24,6 +24,22 @@ spring:
               create-target: target/init.sql
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
+  sleuth:
+    stream:
+      enabled: true
+  rabbitmq:
+    addresses: ${RABBITMQ_IP:172.27.0.103}:5672
+    username: guest
+    password: guest
+  cloud:
+    stream:
+      bindings:
+        mailChannel:
+          destination: mail
+          contentType: application/json
+          group: mail
+          consumer:
+            maxAttempts: 5
 
 # default http port is set to 8080:
 server:

@@ -12,13 +12,13 @@
 
 	<groupId>com.feiyangedu.springcloud</groupId>
 	<artifactId>petstore-parent</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Petstore Parent POM</name>
 
 	<properties>
 		<!-- 项目版本号 -->
-		<project.version>0.0.1-SNAPSHOT</project.version>
+		<project.version>1.0-SNAPSHOT</project.version>
 		<!-- 编码指定为UTF-8 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
