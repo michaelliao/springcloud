@@ -20,5 +20,6 @@
 		<module>../petstore-search</module>
 		<module>../petstore-support</module>
 		<module>../petstore-web</module>
+		<module>../petstore-zipkin</module>
 	</modules>
 </project>

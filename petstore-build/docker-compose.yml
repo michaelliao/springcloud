@@ -67,7 +67,7 @@ services:
   # BEGIN Spring Cloud Apps ###################################################
 
   eureka:
-    image: petstore-eureka:0.0.1-SNAPSHOT
+    image: petstore-eureka:1.0-SNAPSHOT
     container_name: petstore-eureka
     networks:
       devnet:
@@ -76,7 +76,7 @@ services:
       - /tmp
 
   config:
-    image: petstore-config:0.0.1-SNAPSHOT
+    image: petstore-config:1.0-SNAPSHOT
     container_name: petstore-config
     networks:
       devnet:
@@ -84,16 +84,26 @@ services:
     volumes:
       - /tmp
 
+  zipkin:
+    image: petstore-zipkin:1.0-SNAPSHOT
+    container_name: petstore-zipkin
+    networks:
+      devnet:
+        ipv4_address: $ZIPKIN_IP
+    volumes:
+      - /tmp
+
   gateway:
-    image: petstore-gateway:0.0.1-SNAPSHOT
+    image: petstore-gateway:1.0-SNAPSHOT
     container_name: petstore-gateway
     networks:
-      - devnet
+      devnet:
+        ipv4_address: $GATEWAY_IP
     volumes:
       - /tmp
 
   account:
-    image: petstore-account:0.0.1-SNAPSHOT
+    image: petstore-account:1.0-SNAPSHOT
     container_name: petstore-account
     networks:
       - devnet
