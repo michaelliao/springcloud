@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<!-- 引入spring boot预定义的parent -->
+	<!-- Using spring boot parent -->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -17,16 +17,16 @@
 	<name>Petstore Parent POM</name>
 
 	<properties>
-		<!-- 项目版本号 -->
+		<!-- project settings -->
 		<project.version>1.0-SNAPSHOT</project.version>
-		<!-- 编码指定为UTF-8 -->
+		<!-- Encoding: UTF-8 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<!-- 编译设定为1.8 -->
+		<!-- Compiling level: 1.8 -->
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<java.version>1.8</java.version>
-		<!-- 第三方version -->
+		<!-- 3rd-part library version -->
 		<spotify.docker.version>0.4.13</spotify.docker.version>
 		<swagger2.version>2.6.1</swagger2.version>
 	</properties>
@@ -51,25 +51,28 @@
 	</dependencyManagement>
 
 	<dependencies>
+		<!-- Spring Web and MVC support -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<!-- matrix and monitor -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+		<!-- Use Eureka as service register -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
-		<!-- 使用spring-boot-devtools可以监控源码改动并自动重新加载 -->
+		<!-- Auto-reload source code for development -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<!-- 使用spring-boot-starter-test导入所有测试依赖 -->
+		<!-- Spring test support -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -80,16 +83,16 @@
 	<build>
 		<pluginManagement>
 			<plugins>
-				<!-- 打包SpringBoot Application Jar -->
+				<!-- Create SpringBoot executable application jar -->
 				<plugin>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-maven-plugin</artifactId>
 					<configuration>
-						<!-- 不打包dev-tools -->
+						<!-- exclude devtools -->
 						<excludeDevtools>true</excludeDevtools>
 					</configuration>
 				</plugin>
-				<!-- 创建Docker Image -->
+				<!-- Create Docker image -->
 				<plugin>
 					<groupId>com.spotify</groupId>
 					<artifactId>docker-maven-plugin</artifactId>
@@ -99,7 +102,7 @@
 						<imageTags>
 							<imageTag>${project.version}</imageTag>
 						</imageTags>
-						<!-- Dockerfile文件所在目录 -->
+						<!-- directory contains Dockerfile -->
 						<dockerDirectory>../petstore-parent</dockerDirectory>
 						<resources>
 							<resource>
@@ -108,7 +111,7 @@
 								<include>${project.build.finalName}.jar</include>
 							</resource>
 						</resources>
-						<!-- 给Dockerfile传递jarfile参数 -->
+						<!-- argument 'jarfile' required by Dockerfile -->
 						<buildArgs>
 							<jarfile>${project.build.finalName}.jar</jarfile>
 						</buildArgs>
