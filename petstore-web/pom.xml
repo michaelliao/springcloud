@@ -24,7 +24,7 @@
 			<artifactId>account-client</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		<!-- 引入Pebble Engine -->
+		<!-- Pebble for MVC view -->
 		<dependency>
 			<groupId>com.mitchellbosecke</groupId>
 			<artifactId>pebble-spring-boot-starter</artifactId>
