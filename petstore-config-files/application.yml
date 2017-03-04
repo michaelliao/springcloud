@@ -1,6 +1,5 @@
-### application default profile ###
+# application default configuration
 
-# spring config:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver

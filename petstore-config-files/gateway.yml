@@ -1,4 +1,4 @@
-# gateway service
+# gateway configuration
 
 zuul:
   ignoredServices: "*"

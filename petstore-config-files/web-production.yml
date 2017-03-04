@@ -1,0 +1,4 @@
+# web ui service
+
+pebble:
+  cache: true
