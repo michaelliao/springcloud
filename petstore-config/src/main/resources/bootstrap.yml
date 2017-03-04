@@ -29,7 +29,7 @@ spring:
     config:
       server:
         native:
-          search-locations: classpath:conf
+          search-locations: file:../petstore-config-files, file:/etc/petstore-config-files
 
 ---
 

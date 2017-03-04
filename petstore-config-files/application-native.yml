@@ -1,0 +1,15 @@
+### native profile ###
+
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      javax:
+        persistence:
+          schema-generation:
+            create-source: metadata
+            scripts:
+              action: create
+              create-target: /tmp/${spring.application.name}-init.sql
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect

@@ -74,6 +74,8 @@ services:
         ipv4_address: $EUREKA_IP
     volumes:
       - /tmp
+    environment:
+      JAVA_OPTS: -Xmx256m
 
   config:
     image: petstore-config:1.0-SNAPSHOT
@@ -82,7 +84,10 @@ services:
       devnet:
         ipv4_address: $CONFIG_IP
     volumes:
+      - ../petstore-config-files:/etc/petstore-config-files
       - /tmp
+    environment:
+      JAVA_OPTS: -Xmx256m
 
   zipkin:
     image: petstore-zipkin:1.0-SNAPSHOT
@@ -92,6 +97,8 @@ services:
         ipv4_address: $ZIPKIN_IP
     volumes:
       - /tmp
+    environment:
+      JAVA_OPTS: -Xmx512m
 
   gateway:
     image: petstore-gateway:1.0-SNAPSHOT
@@ -101,6 +108,8 @@ services:
         ipv4_address: $GATEWAY_IP
     volumes:
       - /tmp
+    environment:
+      JAVA_OPTS: -Xmx256m
 
   account:
     image: petstore-account:1.0-SNAPSHOT
@@ -109,6 +118,8 @@ services:
       - devnet
     volumes:
       - /tmp
+    environment:
+      JAVA_OPTS: -Xmx256m
 
 networks:
   devnet:

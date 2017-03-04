@@ -1,4 +1,4 @@
-### application config for native profile ###
+### application default profile ###
 
 # spring config:
 spring:
@@ -15,13 +15,11 @@ spring:
     properties:
       javax:
         persistence:
-          # generate DDL script under target/init.sql,
-          # but not execute on startup:
           schema-generation:
-            create-source: metadata
+            database:
+              action: none
             scripts:
-              action: create
-              create-target: target/init.sql
+              action: none
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
   sleuth:
