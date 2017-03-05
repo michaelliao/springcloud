@@ -40,7 +40,7 @@
 				<version>1.7.0.1.1</version>
 				<configuration>
 					<sourceDirectory>${project.basedir}/src/main/resources/static/less</sourceDirectory>
-					<outputDirectory>${project.basedir}/src/main/resources/static/css</outputDirectory>
+					<outputDirectory>${project.build.directory}/classes/static/css</outputDirectory>
 					<compress>false</compress>
 					<includes>
 						<include>main.less</include>

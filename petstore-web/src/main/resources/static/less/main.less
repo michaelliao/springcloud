@@ -19,7 +19,7 @@
 #q {
 	padding-bottom: 6px;
 	border: none;
-	border-bottom: 1px solid #ad2222;
+	border-bottom: 1px solid #ff9000;
 	background-color: transparent;
 	&:focus {
 		outline: none;
@@ -28,21 +28,18 @@
 
 // override uikit /////////////////////////////////////////////////////////////
 
-@base-body-font-family:                         STSong, SimSun, NSimSun;
-@base-heading-font-family:                      STSong, SimSun, NSimSun;
-
 // customize variables.less
 
-@base-body-background:                          #fffaf0;
-@base-body-color:                               #444;
+@base-body-background:                          #f6f6f6;
+@base-body-color:                               #666;
 
-@global-link-color:                             #ad2222;
-@global-link-hover-color:                       darken(@global-link-color, 10%);
+@global-link-color:                             #ff9000;
+@global-link-hover-color:                       lighten(@global-link-color, 10%);
 
 @base-link-hover-text-decoration:               none;
 
 .hook-base-link-hover() {
-	text-shadow: 1px 1px 5px lighten(@global-link-hover-color, 50%);
+
 }
 
 // customize button.less
@@ -55,11 +52,13 @@
     text-shadow: none;
 }
 
-
 // grid.less
 
-@grid-gutter-large-horizontal: @grid-gutter-horizontal;
-@grid-gutter-large-vertical:   @grid-gutter-vertical;
+@global-grid-gutter:            0;
+@grid-gutter-large-horizontal:  0;
+@grid-gutter-large-vertical:    0;
+@grid-gutter-xlarge-horizontal: 0;
+@grid-gutter-xlarge-vertical:   0;
 
 
 // customize utility.less /////////////////////////////////////////////////////
@@ -76,35 +75,40 @@
 
 // customize navbar.less //////////////////////////////////////////////////////
 
-@navbar-background:              #0593d3;
-@navbar-hover-background:		 #0482ba;
+@navbar-background:              #fff;
+@navbar-hover-background:		 #f6f6f6;
 
-@navbar-nav-color:               @global-contrast-color;
+@navbar-nav-color:               @base-body-color;
 @navbar-nav-font-size:           @global-font-size;
 
-@navbar-nav-hover-background:    @navbar-hover-background;
-@navbar-nav-hover-color:         @global-contrast-color;
+@navbar-nav-hover-background:    @base-body-background;
+@navbar-nav-hover-color:         @global-link-color;
 
-@navbar-nav-onclick-background:  darken(@navbar-hover-background, 5%);
-@navbar-nav-onclick-color:       @global-contrast-color;
+@navbar-nav-onclick-background:  @base-body-background;
+@navbar-nav-onclick-color:       @global-link-color;
 
-@navbar-nav-active-background:   @navbar-hover-background;
-@navbar-nav-active-color:        @global-contrast-color;
+@navbar-nav-active-background:   @base-body-background;
+@navbar-nav-active-color:        @global-link-color;
 
 @navbar-text-shadow:             none;
 
 @navbar-brand-font-size:         24px;
-@navbar-brand-color:             @global-contrast-color;
-@navbar-brand-hover-color:       @global-contrast-color;
+@navbar-brand-color:             @base-body-color;
+@navbar-brand-hover-color:       @global-link-color;
 
 .uk-navbar-brand {
     padding-left: 5px;
+}
+
+.hook-navbar-nav() {
+    border-top-width: 0;
 }
 
 .hook-navbar-nav-hover() {
     position: relative; // 1
     border-left-color:  darken(@navbar-hover-background, 5%);
     border-right-color: darken(@navbar-hover-background, 5%);
+    border-top-width: 0;
     background-color:   @navbar-hover-background;
-    color: #fff;
+    color: @global-link-color;
 }

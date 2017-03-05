@@ -4,18 +4,31 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{% block title %} TITLE {% endblock %}</title>
-	<link rel="stylesheet" href="/static/css/main.css">
+	<link rel="stylesheet" href="/static/css/main.css?t={{ __time__ }}">
 	<script src="/static/js/jquery.js"></script>
 	<script src="/static/js/uikit.js"></script>
 </head>
 <body>
+	<div class="uk-navbar uk-navbar-attached" style="background-color:#f6f6f6; padding: 5px 0;">
+		<div class="uk-container uk-container-center">
+			<a href="/">Petstore</a>
+			<a href="/">Source code</a>
+			<span class="uk-float-right">
+				Please <a href="/auth/signin">Sign In</a>
+			</span>
+		</div>
+	</div>
 	<div class="uk-navbar uk-navbar-attached">
 		<div class="uk-container uk-container-center">
-			<a href="/" class="uk-navbar-brand">Petstore</a>
 			<ul class="uk-navbar-nav">
 				<li><a target="_blank" href="http://www.liaoxuefeng.com/">Get Started</a></li>
 				<li><a target="_blank" href="https://github.com/michaelliao/springcloud">Source</a></li>
 			</ul>
+			<div class="uk-navbar-flip">
+				<ul class="uk-navbar-nav">
+					<li><a href="#0"><i class="uk-icon-shopping-cart"></i></a></li>
+				</ul>
+			</div>
 		</div>
 	</div>
 	<div class="uk-container uk-container-center">
