@@ -3,6 +3,7 @@ spring:
     name: eureka
 
 # default eureka server port:
+
 server:
   port: 8761
 
@@ -12,3 +13,41 @@ eureka:
     fetchRegistry: false
   server:
     enableSelfPreservation: false
+
+---
+
+spring:
+  profiles: peer1
+
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: eureka-1
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka-2:8762/eureka/
+  server:
+    enableSelfPreservation: true
+
+---
+
+spring:
+  profiles: peer2
+
+server:
+  port: 8762
+
+eureka:
+  instance:
+    hostname: eureka-2
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka-1:8761/eureka/
+  server:
+    enableSelfPreservation: true
