@@ -11,7 +11,7 @@
 
 	<!-- App相关信息 -->
 	<groupId>com.itranswarp.springcloud</groupId>
-	<artifactId>hello</artifactId>
+	<artifactId>security</artifactId>
 	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Hello SpringBoot App</name>
