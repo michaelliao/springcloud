@@ -1,10 +1,7 @@
-package com.feiyangedu.springcloud.configbean;
+package com.itranswarp.springcloud.configbean;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-
-import com.feiyangedu.springcloud.configbean.config.ProxyConfigs;
 
 /**
  * Spring Boot Application.
@@ -12,7 +9,6 @@ import com.feiyangedu.springcloud.configbean.config.ProxyConfigs;
  * @author Michael Liao
  */
 @SpringBootApplication
-@EnableConfigurationProperties(ProxyConfigs.class)
 public class ConfigBeanApplication {
 
 	public static void main(String[] args) throws Exception {

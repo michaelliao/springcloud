@@ -1,9 +1,11 @@
-package com.feiyangedu.springcloud.configbean.config;
+package com.itranswarp.springcloud.configbean.config;
 
 import java.util.Map;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
+@Component
 @ConfigurationProperties("fetch")
 public class ProxyConfigs {
 

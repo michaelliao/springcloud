@@ -1,4 +1,4 @@
-package com.feiyangedu.springcloud.configbean.config;
+package com.itranswarp.springcloud.configbean.config;
 
 public class ProxyConfig {
 
