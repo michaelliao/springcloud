@@ -1,4 +1,4 @@
-package com.feiyangedu.springcloud.data.service;
+package com.itranswarp.springcloud.data.service;
 
 import java.util.List;
 import java.util.UUID;
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.feiyangedu.springcloud.data.domain.Book;
-import com.feiyangedu.springcloud.data.request.BookReq;
+import com.itranswarp.springcloud.data.domain.Book;
+import com.itranswarp.springcloud.data.request.BookReq;
 
 /**
  * Book service which uses the second data source.

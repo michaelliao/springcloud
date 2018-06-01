@@ -1,4 +1,4 @@
-package com.feiyangedu.springcloud.data.domain;
+package com.itranswarp.springcloud.data.domain;
 
 public class User {
 

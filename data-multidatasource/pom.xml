@@ -10,7 +10,7 @@
 	</parent>
 
 	<!-- App相关信息 -->
-	<groupId>com.feiyangedu.springcloud</groupId>
+	<groupId>com.itranswarp.springcloud</groupId>
 	<artifactId>data-multidatasource</artifactId>
 	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>

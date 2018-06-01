@@ -1,4 +1,4 @@
-package com.feiyangedu.springcloud.data;
+package com.itranswarp.springcloud.data;
 
 import javax.sql.DataSource;
 

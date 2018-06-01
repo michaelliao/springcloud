@@ -1,4 +1,4 @@
-package com.feiyangedu.springcloud.data.request;
+package com.itranswarp.springcloud.data.request;
 
 public class BookReq {
 
