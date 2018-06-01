@@ -2,15 +2,13 @@ spring:
   application:
     name: data-multidatasource
   datasource:
-    url: xxx
-  primary-datasource:
-    driver-class-name: org.hsqldb.jdbc.JDBCDriver
-    url: jdbc:hsqldb:mem:db1
+    driverClassName: org.hsqldb.jdbc.JDBCDriver
+    jdbcUrl: jdbc:hsqldb:mem:db1
     username: sa
     password:
   second-datasource:
-    driver-class-name: org.hsqldb.jdbc.JDBCDriver
-    url: jdbc:hsqldb:mem:db2
+    driverClassName: org.hsqldb.jdbc.JDBCDriver
+    jdbcUrl: jdbc:hsqldb:mem:db2
     username: sa
     password:
 

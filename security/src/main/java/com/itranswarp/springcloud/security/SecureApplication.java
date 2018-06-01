@@ -1,4 +1,4 @@
-package com.itranswarp.springcloud.hello;
+package com.itranswarp.springcloud.security;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @SpringBootApplication
 @RestController
-public class HelloApplication {
+public class SecureApplication {
 
 	@GetMapping("/")
 	@ResponseBody
@@ -27,6 +27,6 @@ public class HelloApplication {
 	}
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(HelloApplication.class, args);
+		SpringApplication.run(SecureApplication.class, args);
 	}
 }
