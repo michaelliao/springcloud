@@ -1,4 +1,4 @@
-package com.feiyangedu.springcloud.pebble.mvc;
+package com.itranswarp.springcloud.pebble.mvc;
 
 public class User {
 

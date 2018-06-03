@@ -6,12 +6,12 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.2.RELEASE</version>
+		<version>2.0.2.RELEASE</version>
 	</parent>
 
 	<!-- App相关信息 -->
-	<groupId>com.feiyangedu.springcloud</groupId>
-	<artifactId>pebble</artifactId>
+	<groupId>com.itranswarp.springcloud</groupId>
+	<artifactId>view-pebble</artifactId>
 	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Spring Boot Pebble App</name>
@@ -38,9 +38,9 @@
 		</dependency>
 		<!-- 引入Pebble Engine -->
 		<dependency>
-			<groupId>com.mitchellbosecke</groupId>
-			<artifactId>pebble-spring-boot-starter</artifactId>
-			<version>2.3.0</version>
+			<groupId>io.pebbletemplates</groupId>
+			<artifactId>pebble-spring-boot-2-starter</artifactId>
+			<version>2.6.0</version>
 		</dependency>
 		<!-- 使用spring-boot-devtools可以监控源码改动并自动重新加载 -->
 		<dependency>
