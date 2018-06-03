@@ -1,4 +1,4 @@
-package com.feiyangedu.springcloud.freemarker.mvc;
+package com.itranswarp.springcloud.freemarker.mvc;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

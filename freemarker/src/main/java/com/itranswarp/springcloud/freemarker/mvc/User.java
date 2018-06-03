@@ -1,4 +1,4 @@
-package com.feiyangedu.springcloud.freemarker.mvc;
+package com.itranswarp.springcloud.freemarker.mvc;
 
 public class User {
 
