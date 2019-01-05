@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class TypeMapping {
 
-	static final Map<String, String> MAPPING = new HashMap<String, String>() {
+	static final Map<String, String> MAPPING = new HashMap<>() {
 		{
 			put("string", "String");
 			put("boolean", "Boolean");

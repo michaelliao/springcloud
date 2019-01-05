@@ -1,5 +1,6 @@
 package com.feiyangedu.springcloud.data;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import javax.annotation.PostConstruct;
@@ -70,10 +71,11 @@ public class DataJpaApplication {
 
 	@PutMapping("/api/users/{id}")
 	public User updateUser(@PathVariable("id") Long id, @RequestBody UserReq user) {
-		User exist = userRepository.findOne(id);
-		if (exist == null) {
+		Optional<User> opt = userRepository.findById(id);
+		if (opt.isEmpty()) {
 			throw new EntityNotFoundException("User not found: " + id);
 		}
+		User exist = opt.get();
 		exist.setEmail(user.getEmail());
 		exist.setGender(user.isGender());
 		exist.setName(user.getName());
@@ -83,9 +85,9 @@ public class DataJpaApplication {
 
 	@DeleteMapping("/api/users/{id}")
 	public boolean deleteUser(@PathVariable("id") Long id) {
-		User exist = userRepository.findOne(id);
-		if (exist != null) {
-			userRepository.delete(id);
+		Optional<User> opt = userRepository.findById(id);
+		if (opt.isPresent()) {
+			userRepository.deleteById(id);
 			return true;
 		}
 		return false;
@@ -94,7 +96,7 @@ public class DataJpaApplication {
 	@GetMapping("/api/users")
 	public Page<User> getUsers(@RequestParam(value = "page", defaultValue = "0") int page,
 			@RequestParam(value = "size", defaultValue = "10") int size) {
-		return userRepository.findAll(new PageRequest(page, size));
+		return userRepository.findAll(PageRequest.of(page, size));
 	}
 
 	public static void main(String[] args) throws Exception {

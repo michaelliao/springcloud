@@ -23,22 +23,22 @@ public class PebbleApplication {
 	boolean pebbleCache;
 
 	/**
-	 * 使用Pebble作为ViewEngine
+	 * use Pebble as ViewEngine
 	 */
 	@Bean
 	public PebbleViewResolver pebbleViewResolver() {
+		PebbleEngine engine = new PebbleEngine.Builder().cacheActive(pebbleCache).loader(new ClasspathLoader()).build();
 		PebbleViewResolver viewResolver = new PebbleViewResolver();
 		viewResolver.setPrefix("templates/");
 		viewResolver.setSuffix(".html");
-		viewResolver.setPebbleEngine(
-				new PebbleEngine.Builder().cacheActive(pebbleCache).loader(new ClasspathLoader()).build());
+		viewResolver.setPebbleEngine(engine);
 		return viewResolver;
 	}
 
 	@Bean
 	public WebMvcConfigurer webMvcConfigurer() {
 		/**
-		 * Spring默认把静态资源文件/static/abc.js映射到/abc.js，不利于配置反向代理。配置为保留/static/前缀
+		 * Keep /static/ prefix.
 		 */
 		return new WebMvcConfigurer() {
 			@Override

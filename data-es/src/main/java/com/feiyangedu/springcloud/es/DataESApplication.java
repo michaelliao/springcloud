@@ -81,7 +81,7 @@ public class DataESApplication {
 		for (News news : newsList) {
 			System.out.println(news);
 		}
-		newsRepository.save(newsList);
+		newsRepository.saveAll(newsList);
 	}
 
 	@GetMapping("/api/title")
